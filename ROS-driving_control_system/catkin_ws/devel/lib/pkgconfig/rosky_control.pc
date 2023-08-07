@@ -1,0 +1,8 @@
+prefix=/home/ros/ROS-driving_control_system/catkin_ws/devel
+
+Name: rosky_control
+Description: Description of rosky_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
