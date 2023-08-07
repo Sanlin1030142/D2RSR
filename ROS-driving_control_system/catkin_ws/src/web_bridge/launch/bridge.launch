@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+  <node pkg="ydlidar_noise_filter" type="noise_filter"  name="noise_filter" output="screen"/>
+  <node name="collector" pkg="web_bridge" type="collector" output="screen">
+  <param name="publish_rate" value="7" />
+  </node>
+</launch>

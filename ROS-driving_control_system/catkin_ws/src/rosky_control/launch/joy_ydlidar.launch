@@ -1,0 +1,21 @@
+<launch>
+
+
+ <!-- joy node -->
+  <node respawn="true" pkg="joy"
+        type="joy_node" name="joy_sensor" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.12" />
+    <param name="default_trig_val" value="true" />
+    <param name="autorepeat_rate" value="1000" />
+  </node>
+
+ <!-- aviodance -->
+  <node pkg="joy_control" type="joy_control" name="joy_control_node" output="screen">
+  <param name="velocity" value="0.11" />
+  <param name="rotational" value="0.45" />
+  <remap from="cmd_vel" to="rosky/cmd_vel"/>
+</node>
+
+  <node pkg="avoidance" type="avoidance" name="avoidance" output="screen"/>
+</launch>

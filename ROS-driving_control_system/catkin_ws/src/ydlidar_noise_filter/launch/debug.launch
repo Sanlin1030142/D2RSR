@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="ydlidar_noise_filter" type="noise_filter_neighboring_only"  name="noise_filter_neighboring_only" output="screen"/>
+  <node pkg="ydlidar_noise_filter" type="noise_filter"  name="noise_filter" output="screen"/>
+  <node pkg="ydlidar_noise_filter" type="debug" name="debug" output="screen"/>
+  <include file="$(find joy_control)/launch/joy_control.launch"/>
+</launch>
