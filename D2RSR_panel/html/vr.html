@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Vertical carousel with TweenMax.js</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+
+
+
+    .slider-wrap {
+      left: 20vw;
+      width: auto;
+    }
+
+    .slider-wrap .slider {
+      position: absolute;
+      width: 10%;
+      left: 20vw;
+      top: 4.63vh;
+
+      border-radius: 10%;
+    }
+
+    .slider-item {
+      padding: 1.85vh 0 2.31vh 1.56vw;
+      display: flex;
+      justify-content: flex-start;
+      position: absolute;
+      opacity: 0;
+      z-index: 0;
+      left: 30vw;
+      left: 0;
+      top: 0;
+    }
+
+    .slider-item .animation-card_image {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .slider-item .animation-card_image img {
+      width: 20vw;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="slider-wrap">
+    <div id="card-slider" class="slider">
+      <div class="slider-item">
+        <div class="animation-card_image">
+          <img src="img/bg.jpg" alt="">
+
+        </div>
+
+      </div>
+      <div class="slider-item">
+        <div class="animation-card_image">
+          <img src="img/bg.jpg" alt="">
+        </div>
+
+      </div>
+      <div class="slider-item">
+        <div class="animation-card_image">
+          <img src="img/bg.jpg" alt="">
+        </div>
+
+      </div>
+      <div class="slider-item">
+        <div class="animation-card_image">
+          <img src="img/bg.jpg" alt="">
+        </div>
+
+      </div>
+      <div class="slider-item">
+        <div class="animation-card_image">
+          <img src="img/bg.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/gsap/1.19.1/TweenMax.min.js'></script>
+  <script>
+    var cards = $('#card-slider .slider-item').toArray();
+
+    startAnim(cards);
+
+    function startAnim(array) {
+
+      TweenMax.fromTo(array[0], 0.5, { x: 0, y: -240, opacity: 0 }, { x: 0, y: 0, opacity: 0.75, zIndex: 0, delay: 0.03, ease: Cubic.easeInOut, onComplete: sortArray(array) });
+
+      TweenMax.fromTo(array[1], 0.5, { x: 0, y: 0, opacity: 0.75, zIndex: 0 }, { x: 79, y: 250, opacity: 1, zIndex: 1, ease: Cubic.easeInOut });
+
+      TweenMax.to(array[2], 0.5, { bezier: [{ x: 79, y: 250 }, { x: 65, y: 400 }, { x: 0, y: 500 }], zIndex: 1, opacity: 1, ease: Cubic.easeInOut });
+
+      TweenMax.fromTo(array[3], 0.5, { x: 0, y: 500, opacity: 0.75, zIndex: 0 }, { x: 0, y: 800, opacity: 0, zIndex: 0, ease: Cubic.easeInOut });
+
+    }
+
+
+    function sortArray(array) {
+      clearTimeout(delay);
+      var delay = setTimeout(function () {
+        var firstElem = array.shift();
+        array.push(firstElem);
+        return startAnim(array);
+      }, 3000)
+    }
+  </script>
+
+</body>
+
+</html>
