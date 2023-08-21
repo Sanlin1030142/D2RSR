@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/cam.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/panorama.css">
+  <link rel="stylesheet" href="css/simulation.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <script src="js/roslib.js"></script>
+  <script src="js/cam.js"></script>
+  <script src="js/panorama.js"></script>
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="js/ros2d.js"></script>
+  <script src="js/eventemitter2.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/map.js"></script>
+  <script src="https://storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/gsap/1.19.1/TweenMax.min.js'></script>
+</head>
+
+<body>
+
+  <div id="top-bar">
+    <img id="logo" src="img/D2RSR_logo.png" alt="D2RSR">
+
+    <nav class="nav">
+      <a href="#" onclick="showContent('home')" class="nav-item is-active" active-color="orange"><i
+          class="fa-solid fa-house" style="color: #b8c3d6;"></i></i> 首頁</a>
+      <a href="#" onclick="showContent('camera')" class="nav-item" active-color="blue"><i
+          class="fa-solid fa-table-cells"></i> 實時監控</a>
+      <a href="#" onclick="showContent('panorama')" class="nav-item" active-color="rebeccapurple"><i
+          class="fa-solid fa-globe"></i> 即時環景</a>
+      <a href="#" onclick="showContent('mapping')" class="nav-item" active-color="red"><i class="fa-regular fa-map"></i>
+        即時地圖</a>
+
+      <span class="nav-indicator"></span>
+    </nav>
+  </div>
+  <div id="home" class="content active">
+    <div id="home-bg"></div>
+    <img id="ROSKY-image" src="img/ROSKY.png" alt="ROSKY" />
+    <div id="ROSKY-text">
+      <div style="font-size: 9vh;">D2RSR</div>
+      <div>災難救助遙測機器人</div>
+    </div>
+    <img id=xbox_bubble src="img/xbox_bubble.png" alt="xbox_bubble" />
+    <img id=bubble src="img/bubble.png" alt="Bubble" />
+  </div>
+
+
+  <div id="camera" class="content ">
+    <div id="title">實時影像監控</div>
+    <img id="cam_status" src="img/cam_multiple.png" alt="cam_multiple" />
+    <div class="image-grid show">
+
+      <img id="grid_top"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+        alt="grid_top" />
+      <img id="grid_top_right"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+        alt="rid_top_right" />
+      <img id="grid_bottom_right"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+        alt="grid_bottom_right" />
+      <img id="grid_bottom"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+        alt="grid_bottom" />
+      <img id="grid_bottom_left"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+        alt="grid_bottom_left" />
+      <img id="grid_top_left"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+        alt="grid_top_left" />
+
+    </div>
+
+    <div class="image-slider">
+      <div id="card-slider" class="slider">
+        <div class="slider-item">
+          <div class="animation-card_image">
+            <img id="slider_top"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+              alt="slider_top">
+
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="animation-card_image">
+            <img id="slider_top_right"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+              alt="slider_top_right">
+
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="animation-card_image">
+            <img id="slider_bottom_right"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+              alt="slider_bottom_right">
+
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="animation-card_image">
+            <img id="slider_bottom"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+              alt="slider_bottom">
+
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="animation-card_image">
+            <img id="slider_bottom_left"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+              alt="slider_bottom_left">
+
+          </div>
+        </div>
+        <div class="slider-item">
+          <div class="animation-card_image">
+            <img id="slider_top_left"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+              alt="slider_top_left">
+
+          </div>
+        </div>
+      </div>
+      <img id=camera_car src="img/D2RSR_car.png" alt="car" />
+      <img id=camera_view src="img/D2RSR_view.png" alt="view" />
+
+    </div>
+  </div>
+
+  <div id="panorama" class="content">
+    <div id="carousel_container" tabindex="0">
+      <div class="carousel-content">
+
+
+        <img id='mjpeg1'
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+          alt="MJPEG Stream" />
+        <img id='mjpeg2'
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
+          alt="MJPEG Stream" />
+
+      </div>
+    </div>
+    <img id=panorama_car src="img/D2RSR_car.png" alt="panorama_car" />
+    <img id=panorama_view src="img/D2RSR_view.png" alt="panorama_view" />
+
+  </div>
+
+  <div id="mapping" class="content">
+    <div id="map">
+      <div id="cover"></div>
+      <img id="download" src="img/download.png">
+      <img id="stop" src="img/stop.png" onclick=STOP()>
+      <img id="loading" src="img/loading.png">
+      <img id="start" src="img/start.png" onclick="START()">
+    </div>
+
+
+
+
+    <div id="simulation" class="Simulation">
+      <div class="condition">
+        <div class="RoadTop"></div>
+        <div class="RoadBottom"></div>
+        <ul class="RoadMiddlewall" id="wall">
+          <li class="RoadMiddle white"></li>
+          <li class="RoadMiddle black"></li>
+          <li class="RoadMiddle white"></li>
+          <li class="RoadMiddle black"></li>
+          <li class="RoadMiddle white"></li>
+          <li class="RoadMiddle black"></li>
+          <li class="RoadMiddle white"></li>
+          <li class="RoadMiddle black"></li>
+          <li class="RoadMiddle white"></li>
+          <li class="RoadMiddle black"></li>
+        </ul>
+
+        <img src="./img/tire.png" class="tireLeft" id="tireleft" />
+        <img src="./img/tire.png" class="tireRight" id="tireright" />
+        <img src="./img/car.png" class="car" />
+        <div class="quartercircleLeftTop" id="top-left">
+          <div class="quartercircleLeftTop-2"></div>
+        </div>
+        <div class="quartercircleLeftBottom" id="bottom-left">
+          <div class="quartercircleLeftBottom-2"></div>
+        </div>
+        <div class="quartercircleRightTop" id="top-right">
+          <div class="quartercircleRightTop-2"></div>
+        </div>
+        <div class="quartercircleRightBottom" id="bottom-right">
+          <div class="quartercircleRightBottom-2"></div>
+        </div>
+        <svg class="quartercircleTop" width="250" height="77" viewBox="0 0 250 77" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path id="top" d="M20 37.5265C117.428 -8.57366 199.262 29.9671 228 55" stroke="#b7545400" stroke-width="30"
+            stroke-linecap="square" />
+        </svg>
+
+        <svg class="quartercircleBottom" width="250" height="77" viewBox="0 0 250 77" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path id="bottom" d="M230 39.4735C132.572 85.5737 50.7382 47.0329 22 22" stroke="#b7545400" stroke-width="30"
+            stroke-linecap="square" />
+        </svg>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script type="text/javascript" src="js/simulation_ROSKY.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+
+</html>

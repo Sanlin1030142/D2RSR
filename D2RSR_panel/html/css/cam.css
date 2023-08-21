@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+
+#title {
+  position: fixed;
+  left: 7vw;
+  top: 12vh;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 6vh;
+  font-weight: 900;
+  -webkit-text-stroke: 1px #ffffff; /* outline thickness | outline color */
+  color: transparent; /* make the inside of the text transparent */
+}
+
+#content {
+  position: fixed;
+  left: 20vw;
+  height: 80vh;
+}
+
+#camera_car {
+  position: fixed;
+  top: 35vh;
+  left: 70vw;
+  width: 50vh;
+}
+
+#camera_view {
+  position: fixed;
+  top: 35vh;
+  left: 70vw;
+  width: 50vh;
+  rotate: 0deg;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-grid {
+  display: grid;
+  position: fixed;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
+  left: 8vw;
+  top: 25vh;
+  height: auto; /* Adjust height to account for top margin */
+  width: 90%;
+  opacity: 0; /* starts hidden */
+  transition: opacity 0.5s ease-in-out; /* fade-in effect */
+}
+
+.image-grid.show {
+  opacity: 1; /* fully visible when the show class is added */
+}
+.image-grid img {
+  width: 70%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
+  cursor: pointer;
+  padding: 2vh;
+}
+
+
+
+#cam_status {
+  position: fixed;
+  top: 10vh;
+  left: 30vw;
+  width: 5vw;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#cam_status:hover {
+  transform: scale(1.1);
+}
+
+
+.image-slider {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: block;
+  top:0vh;
+  transform: translateX(150%); /* start off the screen to the right */
+  transition: transform 0.5s ease-in-out; /* slide-in effect */
+}
+.image-slider.show {
+  transform: translateX(0); /* slide to its original position when show class is added */
+}
+
+.image-slider .slider {
+  position: fixed;
+  width: 100%;
+
+}
+
+.slider-item {
+  width: 20vw;
+  padding: 20px 0 25px 30px;
+  border-radius: 10%;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  opacity: 0;
+  z-index: 0;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.slider-item .animation-card_image {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.slider-item .animation-card_image img {
+  width: 20vw;
+  cursor: pointer;
+  border-radius: 10%;
+  object-fit: cover;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <canvas id="mjpegCanvas"></canvas>
+        </a-assets>
+
+        <a-videosphere src="#mjpegCanvas"></a-videosphere>
+    </a-scene>
+
+    <script>
+        let img = new Image();
+        let canvas = document.getElementById('mjpegCanvas');
+        let ctx = canvas.getContext('2d');
+
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            img.src = '192.168.0.26:8080/stream?topic="stitched_frame';  // Set the src again to fetch a new frame
+        };
+
+        img.src = '192.168.0.26:8080/stream?topic="stitched_frame';
+    </script>
+</body>
+
+</html>

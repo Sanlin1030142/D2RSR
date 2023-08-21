@@ -1,0 +1,63 @@
+#map{
+    position: fixed;
+    width: 30vw;
+    height: 30vh;
+    left: 5vw;
+    top: 30vh;
+    z-index: 0;
+    display: block;
+}
+
+
+
+#loading{
+    position: fixed;
+    width: 10vw;
+    height: auto;
+    left: 15vw;
+    top: 50vh;
+    z-index: 0;
+    transition: transform 2s ease-in-out;
+}
+
+#start{
+    position: fixed;
+    width: 6vw;
+    height: auto;
+    left: 55vw;
+    top: 10vh;
+    transition: transform 2s ease-in-out;
+    cursor: pointer;
+}
+
+#cover{
+    position: fixed;
+    width: 37vw;
+    height: 61.5vh;
+    background-color: rgb(0, 0, 0);
+    display: block;
+}
+
+#download{
+    position: fixed;
+    width: 6vw;
+    height: auto;
+    left: 65vw;
+    top: 10vh;
+    transition: transform 2s ease-in-out;
+    cursor: pointer;
+}
+
+#stop{
+    position: fixed;
+    width: 6vw;
+    height: auto;
+    left: 75vw;
+    top: 10vh;
+    transition: transform 2s ease-in-out;
+    cursor: pointer;
+}
+
+#download:hover, #stop:hover, #start:hover{
+    opacity: 0.7;
+}

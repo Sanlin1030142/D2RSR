@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+
+
+
+#carousel_container {
+  position: fixed;
+  top: 7vh;
+  width: 200%;
+  left: 0vw;
+  height: 93vh; /* for example, you can adjust this value */
+  z-index: 100;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+}
+
+.carousel-content {
+  display: inline-block;
+  width: 100%;
+  left: -10vw;
+  vertical-align: top;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-content img {
+  z-index: 15;
+  width: 140%;
+  margin: 0;
+  padding: 0;
+}
+
+
+#content {
+  position: fixed;
+  left: 20vw;
+  height: 80vh;
+  margin: 0;
+  padding: 0;
+}
+
+#panorama_car{
+  position: fixed;
+  top: 65vh;
+  left: 82vw;
+  width: 30vh;
+  z-index: 100;
+}
+
+#panorama_view{
+  position: fixed;
+  top: 65vh;
+  left: 82vw;
+  width: 30vh;
+  rotate: 0deg;
+  z-index: 100;
+  
+}
+
+
