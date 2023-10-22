@@ -1,55 +1,83 @@
-#map{
+#map {
     position: absolute;
     left: 40%;
     top: 5%;
     z-index: 0;
     display: block;
     overflow: hidden;
-}
-
-
-
-#loading{
+  }
+  
+  #map_camera {
+    user-select: none;
+    position: relative;
+    left: 0%;
+    top: 0%;
+    width: 20vw;
+    padding: 0;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  .collapse_menu {
+    user-select: none;
+    position: absolute;
+    top: 2vh;
+    left: 0vw;
+    width: 20vw;
+  }
+  
+  #collapsible {
+    position: fixed;
+    height: 10vh;
+    left: 90vw;
+    top: 10vh;
+    transition: transform 2s ease-in-out;
+    cursor: pointer;
+    border-radius: 15%;
+    z-index: 100;
+  }
+  
+  #icon {
+    padding-left: 1.5vw;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  #loading {
     position: fixed;
     width: 10vw;
     height: auto;
-    left: 15vw;
-    top: 50vh;
+    left: 40vw;
+    top: 60vh;
     z-index: 0;
-    transition: transform 2s ease-in-out;
-}
-
-#start{
+    transition: transform 15s ease-in-out;
+  }
+  
+  #start {
     position: fixed;
-    width: 6vw;
+    width: 8vw;
     height: auto;
-    left: 55vw;
-    top: 10vh;
+    left: 88vw;
+    top: 80vh;
     transition: transform 2s ease-in-out;
     cursor: pointer;
-}
-
-
-#download{
+    display: inline;
+  }
+  
+  
+  #stop {
     position: fixed;
-    width: 6vw;
+    width: 8vw;
     height: auto;
-    left: 65vw;
-    top: 10vh;
-    transition: transform 2s ease-in-out;
+    left: 88vw;
+    top: 80vh;
+    transition: transform 5s ease-in-out;
     cursor: pointer;
-}
-
-#stop{
-    position: fixed;
-    width: 6vw;
-    height: auto;
-    left: 75vw;
-    top: 10vh;
-    transition: transform 2s ease-in-out;
-    cursor: pointer;
-}
-
-#download:hover, #stop:hover, #start:hover{
+    display: none;
+  }
+  
+  #download:hover,
+  #stop:hover,
+  #start:hover {
     opacity: 0.7;
-}
+  }
+  

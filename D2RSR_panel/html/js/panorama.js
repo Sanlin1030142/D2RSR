@@ -40,6 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+        if (rotateValue <= 0) {
+
+
+            const targetRotate = 360;
+            const scrollPercentage = targetRotate / 5.4;
+            const targetScrollLeft = (scrollPercentage / 100) * (container.scrollWidth - container.offsetWidth)-30;
+            container.scrollLeft = targetScrollLeft;
+
+        }
     }
 
 

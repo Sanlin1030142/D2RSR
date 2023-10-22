@@ -37,8 +37,11 @@ var originalSrc = {
   'slider_top_left': 'http://192.168.0.26:8000/stream?topic=/trace/camera_5',
   'camera_car': 'img/D2RSR_car.png',
   'camera_view': 'img/D2RSR_view.png',
-  'mjpeg1': 'http://192.168.0.26:8000/stream?topic=/multi/stitched_frame',
-  'mjpeg2': 'http://192.168.0.26:8000/stream?topic=/multi/stitched_frame'
+  'mjpeg1': 'http://192.168.0.26:8090',
+  'mjpeg2': 'http://192.168.0.26:8090',
+  // http://192.168.0.26:8090/
+  // http://192.168.0.26:8000/stream?topic=/multi/stitched_frame
+  'map_camera': 'http://192.168.0.26:8000/stream?topic=/trace/camera_0'
 };
 
 function loadImageBatch(images) {
@@ -80,6 +83,16 @@ function showContent(pageId) {
     mjpeg2.src = originalSrc[mjpeg2.id];
 
   }
+    // 如果是全景页面，加载图片
+  if (pageId === 'mapping') {
+      // 加载mjpeg1
+      var map_camera = document.getElementById('map_camera');
+      map_camera.src = originalSrc[map_camera.id];
+  
+  
+
+  
+    }
 }
 
 function retryLoadImage(img, maxRetries) {

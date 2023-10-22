@@ -1,10 +1,10 @@
 .Simulation {
   user-select: none;
-  position: absolute;
-  left: 5%;
-  top: 10%;
-  width: 30vw;
-  height:80vh;
+  position: fixed;
+  left: 0%;
+  top: 5%;
+  width: 40vw;
+  height:100vh;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -13,13 +13,12 @@ li::marker {
 }
 .condition {
   user-select: none;
-  position: flex;
+  position: absolute;
   left: 0%;
   top:0%;
   width: 100%;
   height: 100%;
   background-color: rgb(144, 144, 144);
-  border-radius: 10%;
 }
 
 .RoadTop {
@@ -119,7 +118,7 @@ li::marker {
 .tireLeft {
   user-select: none;
   position: absolute;
-  left: 28.5%;
+  left: 26%;
   top: 35%;
   width: 12%;
   height: 2.5%;
@@ -129,7 +128,7 @@ li::marker {
 .tireRight {
   user-select: none;
   position: absolute;
-  left: 63.2%;
+  left: 65.5%;
   top: 35%;
   width: 12%;
   height: 2.5%;
@@ -141,7 +140,7 @@ li::marker {
   position: absolute;
   width: 100px;
   height: 100px;
-  left: 20%;
+  left: 15%;
   top: 10%;
   background-color: #b7545400;
   animation: fade 0.5s ease-in-out infinite alternate;
@@ -190,9 +189,8 @@ li::marker {
 
   position: absolute;
   width: 100px;
-
   height: 100px;
-  left: 20%;
+  left: 15%;
   top: 80%;
   background-color: #b7545400;
   animation: fade 0.5s ease-in-out infinite alternate;
@@ -238,12 +236,11 @@ li::marker {
 
 .quartercircleBottom {
   user-select: none;
-
   position: absolute;
   height: 20%;
   width: 20%;
   left: 41%;
-  top: 85%;
+  top: 82%;
   transform: rotate(-5deg);
   animation: fade 0.5s ease-in-out infinite alternate;
 }
@@ -255,7 +252,7 @@ li::marker {
   height: 20%;
   width: 20%;
   left: 41%;
-  top: -3%;
+  top: 3%;
   transform: rotate(-5deg);
   animation: fade 0.5s ease-in-out infinite alternate;
 }
@@ -283,51 +280,8 @@ li::marker {
   animation: fade 0.5s ease-in-out infinite alternate;
 }
 
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(0, -1px, 0);
-  }
-  20%,
-  80% {
-    transform: translate3d(0, +2px, 0);
-  }
-  30%,
-  70% {
-    transform: translate3d(0, -4px, 0);
-  }
-  40%,
-  60% {
-    transform: translate3d(0, +4px, 0);
-  }
-  50% {
-    transform: translate3d(0, -4px, 0);
-  }
-}
 
-.simulation-head {
-  user-select: none;
-  font-family: "Oswald", "RobotoDraft", "Microsoft JhengHei", sans-serif;
-  position: absolute;
-  left: 16%;
-  top: 2%;
-  font-size: 160px;
-  font-weight: bolder;
-  letter-spacing: 15px;
-  color: rgba(27, 28, 23, 0.7);
-}
 
-.camara {
-  user-select: none;
-  position: absolute;
-  left: 10%;
-  top: 30%;
-  height: 50%;
-  width: 35.5%;
-  border: 15px double rgb(255, 255, 255);
-  border-radius: 10%;
-  overflow: hidden;
-}
 
 @keyframes fade {
   from {
@@ -353,23 +307,3 @@ li::marker {
   }
 }
 
-.camera_image {
-  height: 100%;
-  width: 100%;
-}
-
-.camera_button {
-  position: absolute;
-  left: 42%;
-  top: 15%;
-  font-size: 85px;
-  color: azure;
-}
-
-.graph {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(rgb(74, 74, 94), rgb(156, 180, 219));
-  opacity: 1;
-}

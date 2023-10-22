@@ -1,0 +1,10 @@
+ROS-driving_control_system/catkin_ws/build/
+ROS-driving_control_system/catkin_ws/devel/
+openvino_env/
+*.pyc
+*.ipynb
+*.deb
+*.jpg
+*.run
+.vscode/launch.json
+.vscode/settings.json

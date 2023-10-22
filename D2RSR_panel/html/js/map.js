@@ -26,8 +26,8 @@ function init() {
 
   var viewer = new ROS2D.Viewer({
     divID: 'map',
-    width: windowWidth*0.6,
-    height: windowHeight*0.9,
+    width: windowWidth * 0.6,
+    height: windowHeight,
     overflows: 'hidden'
   });
 
@@ -52,10 +52,12 @@ function START() {
   // 先移動 loading 圖片
   document.getElementById("loading").style.transform = "translateX(100vw)";
   console.log("START");
+  document.getElementById('start').style.display = 'none';
+  document.getElementById('stop').style.display = 'inline';
   publisher.publish(start);
 
 
-  
+
 }
 
 // function START() {
@@ -70,19 +72,40 @@ function START() {
 // }
 
 function STOP() {
-  let loadingElem = document.getElementById("loading");
-  loadingElem.style.transition = "none"; // 暫時關閉動畫
-  loadingElem.style.transform = "translateX(-100vw)";
-  // 恢復動畫轉場效果，並進行動畫
-  console.log("STOP");
-  setTimeout(function () {
-    loadingElem.style.transition = "transform 1s ease-in-out"; // 打開動畫
-  }, 10); // 10毫秒後恢復動畫效果並進行動畫
-  loadingElem.style.transform = "translateX( 0vw )";
   publisher.publish(stop);
+  setTimeout(function () {
+    let loadingElem = document.getElementById("loading");
+    console.log("STOP");
+    setTimeout(function () {
+      loadingElem.style.transition = "transform 5s ease-in-out"; // 打開動畫
+    }, 10); // 10毫秒後恢復動畫效果並進行動畫
+    loadingElem.style.transform = "translateX( 0vw )";
+    document.getElementById('stop').style.display = 'none';
+    document.getElementById('start').style.display = 'inline';
+  }, 2000);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   init();
 },);
 
+window.addEventListener('DOMContentLoaded', (event) => {
+  let icon = document.getElementById("icon");
+
+  icon.addEventListener("click", function () {
+    let mapCamera = document.getElementById("map_camera");
+    let icon = document.getElementById("icon");
+
+    let computedStyle = window.getComputedStyle(mapCamera);
+
+    if (computedStyle.display === "block") {
+      mapCamera.style.display = "none";
+      icon.classList.remove("fa-video");
+      icon.classList.add("fa-video-slash");
+    } else {
+      mapCamera.style.display = "block";
+      icon.classList.remove("fa-video-slash");
+      icon.classList.add("fa-video");
+    }
+  });
+});

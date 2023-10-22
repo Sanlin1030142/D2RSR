@@ -109,7 +109,7 @@ window.onload = function () {
   function startAnim(array) {
     TweenMax.fromTo(array[0], 0.5, { x: 0, y: 0, opacity: 0.3, scale: 1 }, { x: 0, y: -240, opacity: 0, zIndex: 0, delay: 0.03, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[1], 0.5, { x: 158, y: 250, opacity: 1, zIndex: 1, scale: 1 }, { x: 0, y: 0, opacity: 0.3, zIndex: 0, scale: 1, ease: Cubic.easeInOut });
-    TweenMax.to(array[2], 0.5, { bezier: [{ x: 150, y: 500 }, { x: 280, y: 400 }, { x: 340, y: 450 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
+    TweenMax.to(array[2], 0.5, { bezier: [{ x: 150, y: 500 }, { x: 280, y: 400 }, { x: 340, y: 300 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[3], 0.5, { x: 0, y: 1000, opacity: 0, zIndex: 0, scale: 1 }, { x: 0, y: 800, opacity: 0.3, zIndex: 0, ease: Cubic.easeInOut });
     if (array[4]) {
       TweenMax.to(array[4], 0.5, { opacity: 0 });
@@ -130,7 +130,7 @@ window.onload = function () {
   function reverseAnim(array) {
 
     TweenMax.fromTo(array[1], 0.5, { x: 0, y: -240, opacity: 0, scale: 1 }, { x: 0, y: 0, opacity: 0.3, zIndex: 0, delay: 0.03, ease: Cubic.easeInOut });
-    TweenMax.to(array[2], 0.5, { bezier: [{ x: 0, y: 0 }, { x: 280, y: 100 }, { x: 340, y: 450 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
+    TweenMax.to(array[2], 0.5, { bezier: [{ x: 0, y: 0 }, { x: 280, y: 100 }, { x: 340, y: 300 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[3], 0.5, { x: 150, y: 300, opacity: 1, zIndex: 0, scale: 1 }, { x: 0, y: 800, opacity: 0.3, zIndex: 0, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[4], 0.5, { x: 0, y: 600, opacity: 0.3, zIndex: 1, scale: 1 }, { x: 0, y: 900, opacity: 0, zIndex: 0, scale: 1, ease: Cubic.easeInOut });
     if (array[0]) {
@@ -187,4 +187,3 @@ window.onload = function () {
   });
 
 };
-

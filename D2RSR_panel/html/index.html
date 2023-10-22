@@ -76,8 +76,6 @@
       <img id="grid_top_left"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
         alt="grid_top_left" />
-        
-
     </div>
 
     <div class="image-slider">
@@ -87,7 +85,6 @@
             <img id="slider_top"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
               alt="slider_top">
-
           </div>
         </div>
         <div class="slider-item">
@@ -95,7 +92,6 @@
             <img id="slider_top_right"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
               alt="slider_top_right">
-
           </div>
         </div>
         <div class="slider-item">
@@ -138,17 +134,13 @@
   </div>
 
   <div id="panorama" class="content">
-    <div id="carousel_container" tabindex="0">
+    <div id="carousel_container">
       <div class="carousel-content">
-
-
         <img id='mjpeg1'
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
-          alt="MJPEG Stream" />
-        <img id='mjpeg2'
+          alt="MJPEG Stream" /><img id='mjpeg2'
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg=="
           alt="MJPEG Stream" />
-
       </div>
     </div>
     <img id=panorama_car src="img/D2RSR_car.png" alt="panorama_car" />
@@ -158,66 +150,68 @@
 
   <div id="mapping" class="content" style="overflow: hidden;">
     <div id="map">
-      <img id="download" src="img/download.png">
-      <img id="stop" src="img/stop.png" onclick=STOP()>
-      <img id="loading" src="img/loading.png">
-      <img id="start" src="img/start.png" onclick="START()">
-    </div>
+      <div class="collapse_menu">
+        <div>
+          <img id="stop" src="img/stop.png" onclick=STOP()>
+          <img id="loading" src="img/loading.png">
+          <img id="start" src="img/start.png" onclick="START()">
 
-
-
-
-    <div id="simulation" class="Simulation">
-      <div class="condition">
-        <div class="RoadTop"></div>
-        <div class="RoadBottom"></div>
-        <ul class="RoadMiddlewall" id="wall">
-          <li class="RoadMiddle white"></li>
-          <li class="RoadMiddle black"></li>
-          <li class="RoadMiddle white"></li>
-          <li class="RoadMiddle black"></li>
-          <li class="RoadMiddle white"></li>
-          <li class="RoadMiddle black"></li>
-          <li class="RoadMiddle white"></li>
-          <li class="RoadMiddle black"></li>
-          <li class="RoadMiddle white"></li>
-          <li class="RoadMiddle black"></li>
-        </ul>
-
-        <img src="./img/tire.png" class="tireLeft" id="tireleft" />
-        <img src="./img/tire.png" class="tireRight" id="tireright" />
-        <img src="./img/car.png" class="car" />
-        <div class="quartercircleLeftTop" id="top-left">
-          <div class="quartercircleLeftTop-2"></div>
         </div>
-        <div class="quartercircleLeftBottom" id="bottom-left">
-          <div class="quartercircleLeftBottom-2"></div>
-        </div>
-        <div class="quartercircleRightTop" id="top-right">
-          <div class="quartercircleRightTop-2"></div>
-        </div>
-        <div class="quartercircleRightBottom" id="bottom-right">
-          <div class="quartercircleRightBottom-2"></div>
-        </div>
-        <svg class="quartercircleTop" width="250" height="77" viewBox="0 0 250 77" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path id="top" d="M20 37.5265C117.428 -8.57366 199.262 29.9671 228 55" stroke="#b7545400" stroke-width="30"
-            stroke-linecap="square" />
-        </svg>
-
-        <svg class="quartercircleBottom" width="250" height="77" viewBox="0 0 250 77" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path id="bottom" d="M230 39.4735C132.572 85.5737 50.7382 47.0329 22 22" stroke="#b7545400" stroke-width="30"
-            stroke-linecap="square" />
-        </svg>
       </div>
+
+
+
+      <div id="simulation" class="Simulation">
+        <div class="condition">
+          <div class="RoadTop"></div>
+          <div class="RoadBottom"></div>
+          <ul class="RoadMiddlewall" id="wall">
+            <li class="RoadMiddle white"></li>
+            <li class="RoadMiddle black"></li>
+            <li class="RoadMiddle white"></li>
+            <li class="RoadMiddle black"></li>
+            <li class="RoadMiddle white"></li>
+            <li class="RoadMiddle black"></li>
+            <li class="RoadMiddle white"></li>
+            <li class="RoadMiddle black"></li>
+            <li class="RoadMiddle white"></li>
+            <li class="RoadMiddle black"></li>
+          </ul>
+
+          <img src="./img/tire.png" class="tireLeft" id="tireleft" />
+          <img src="./img/tire.png" class="tireRight" id="tireright" />
+          <img src="./img/car.png" class="car" />
+          <div class="quartercircleLeftTop" id="top-left">
+            <div class="quartercircleLeftTop-2"></div>
+          </div>
+          <div class="quartercircleLeftBottom" id="bottom-left">
+            <div class="quartercircleLeftBottom-2"></div>
+          </div>
+          <div class="quartercircleRightTop" id="top-right">
+            <div class="quartercircleRightTop-2"></div>
+          </div>
+          <div class="quartercircleRightBottom" id="bottom-right">
+            <div class="quartercircleRightBottom-2"></div>
+          </div>
+          <svg class="quartercircleTop" width="250" height="77" viewBox="0 0 250 77" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path id="top" d="M20 37.5265C117.428 -8.57366 199.262 29.9671 228 55" stroke="#b7545400" stroke-width="30"
+              stroke-linecap="square" />
+          </svg>
+
+          <svg class="quartercircleBottom" width="250" height="77" viewBox="0 0 250 77" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path id="bottom" d="M230 39.4735C132.572 85.5737 50.7382 47.0329 22 22" stroke="#b7545400"
+              stroke-width="30" stroke-linecap="square" />
+          </svg>
+        </div>
+      </div>
+
+
     </div>
 
-
-  </div>
-
-  <script type="text/javascript" src="js/simulation_ROSKY.js"></script>
-  <script src="js/menu.js"></script>
+    <script type="text/javascript" src="js/simulation_ROSKY.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

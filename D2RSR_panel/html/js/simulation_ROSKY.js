@@ -61,11 +61,11 @@ ros_car_listener.subscribe(function (message) {
   }
 
   if (message.velocity.x > 0) {
-    delay = 100 - 50 * message.velocity.x;
+    delay = 300 - 50 * message.velocity.x;
     forward(delay);
   }
   if (message.velocity.x < 0) {
-    delay = 100 + 50 * message.velocity.x;
+    delay = 300 + 50 * message.velocity.x;
     backward(delay);
   }
 
