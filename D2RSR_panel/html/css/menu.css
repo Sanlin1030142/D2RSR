@@ -9,6 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(rgb(90, 90, 90), rgb(133, 133, 133),rgb(90, 90, 90));
+  overflow: hidden;
 }
 
 #about-image{

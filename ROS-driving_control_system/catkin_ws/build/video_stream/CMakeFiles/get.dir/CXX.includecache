@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/master/D2RSR/ROS-driving_control_system/catkin_ws/src/video_stream/src/get_video.cpp
+opencv2/opencv.hpp
+-
+iostream
+-
+

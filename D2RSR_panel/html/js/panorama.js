@@ -40,33 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-        if (rotateValue >= 540) {
-
-
-            // 设定目标旋转值
-            const targetRotate = 180;
-
-            // 计算滚动的百分比，这是旋转值与滚动的关系
-            const scrollPercentage = targetRotate / 5.4;  // 修改点1
-            const targetScrollLeft = (scrollPercentage / 100) * (container.scrollWidth * 0.98 - container.offsetWidth * 1.52);
-
-            // 逆向计算对应的scrollLeft值
-            container.scrollLeft = targetScrollLeft;
-            panorama.style.transform = `rotate(${targetRotate}deg)`;
-        }
-        if (rotateValue <= 0) {
-
-
-            // 设定目标旋转值
-            const targetRotate = 360;
-
-            // 计算滚动的百分比，这是旋转值与滚动的关系
-            const scrollPercentage = targetRotate / 5.4;  // 修改点1
-            panorama.style.transform = `rotate(${targetRotate}deg)`;
-            const targetScrollLeft = (scrollPercentage / 100) * (container.scrollWidth - container.offsetWidth);
-            container.scrollLeft = targetScrollLeft;
-
-        }
     }
 
 

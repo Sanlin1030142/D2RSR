@@ -23,22 +23,22 @@ items.forEach((item, index) => {
 
 // 1. 保存原始的图片地址。
 var originalSrc = {
-  'grid_top': 'http://192.168.0.26:8080/stream?topic=/trace/camera_0',
-  'grid_top_right': 'http://192.168.0.26:8080/stream?topic=/trace/camera_1',
-  'grid_bottom_right': 'http://192.168.0.26:8080/stream?topic=/trace/camera_2',
-  'grid_bottom': 'http://192.168.0.26:8080/stream?topic=/trace/camera_3',
-  'grid_bottom_left': 'http://192.168.0.26:8080/stream?topic=/trace/camera_4',
-  'grid_top_left': 'http://192.168.0.26:8080/stream?topic=/trace/camera_5',
-  'slider_top': 'http://192.168.0.26:8080/stream?topic=/trace/camera_0',
-  'slider_top_right': 'http://192.168.0.26:8080/stream?topic=/trace/camera_1',
-  'slider_bottom_right': 'http://192.168.0.26:8080/stream?topic=/trace/camera_2',
-  'slider_bottom': 'http://192.168.0.26:8080/stream?topic=/trace/camera_3',
-  'slider_bottom_left': 'http://192.168.0.26:8080/stream?topic=/trace/camera_4',
-  'slider_top_left': 'http://192.168.0.26:8080/stream?topic=/trace/camera_5',
+  'grid_top': 'http://192.168.0.26:8000/stream?topic=/trace/camera_0',
+  'grid_top_right': 'http://192.168.0.26:8000/stream?topic=/trace/camera_1',
+  'grid_bottom_right': 'http://192.168.0.26:8000/stream?topic=/trace/camera_2',
+  'grid_bottom': 'http://192.168.0.26:8000/stream?topic=/trace/camera_3',
+  'grid_bottom_left': 'http://192.168.0.26:8000/stream?topic=/trace/camera_4',
+  'grid_top_left': 'http://192.168.0.26:8000/stream?topic=/trace/camera_5',
+  'slider_top': 'http://192.168.0.26:8000/stream?topic=/trace/camera_0',
+  'slider_top_right': 'http://192.168.0.26:8000/stream?topic=/trace/camera_1',
+  'slider_bottom_right': 'http://192.168.0.26:8000/stream?topic=/trace/camera_2',
+  'slider_bottom': 'http://192.168.0.26:8000/stream?topic=/trace/camera_3',
+  'slider_bottom_left': 'http://192.168.0.26:8000/stream?topic=/trace/camera_4',
+  'slider_top_left': 'http://192.168.0.26:8000/stream?topic=/trace/camera_5',
   'camera_car': 'img/D2RSR_car.png',
   'camera_view': 'img/D2RSR_view.png',
-  'mjpeg1': 'http://192.168.0.26:8080/stream?topic=/stitched_frame',
-  'mjpeg2': 'http://192.168.0.26:8080/stream?topic=/stitched_frame'
+  'mjpeg1': 'http://192.168.0.26:8000/stream?topic=/multi/stitched_frame',
+  'mjpeg2': 'http://192.168.0.26:8000/stream?topic=/multi/stitched_frame'
 };
 
 function loadImageBatch(images) {
@@ -105,3 +105,5 @@ document.querySelectorAll('img').forEach(img => {
     retryLoadImage(this, 3);  // 尝试重新加载3次
   });
 });
+
+

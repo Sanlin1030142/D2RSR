@@ -121,6 +121,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -208,27 +209,25 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+find_package(CURL REQUIRED)
 find_package(OpenCV REQUIRED)
+
 add_executable(get src/get_video.cpp)
 target_link_libraries(get ${OpenCV_LIBS})
 target_link_libraries(get ${catkin_LIBRARIES})
 
-find_package(OpenCV REQUIRED)
 add_executable(merge src/merge.cpp)
 target_link_libraries(merge ${OpenCV_LIBS})
 target_link_libraries(merge ${catkin_LIBRARIES})
 
-find_package(OpenCV REQUIRED)
 add_executable(trace src/trace.cpp)
 target_link_libraries(trace ${OpenCV_LIBS})
 target_link_libraries(trace ${catkin_LIBRARIES})
 
-find_package(OpenCV REQUIRED)
 add_executable(record src/record.cpp)
 target_link_libraries(record ${OpenCV_LIBS})
 target_link_libraries(record ${catkin_LIBRARIES})
 
-find_package(CURL REQUIRED)
 include_directories(${CURL_INCLUDE_DIRS})
 add_executable(split src/split_video.cpp)
 target_link_libraries(split ${OpenCV_LIBS} ${CURL_LIBRARIES})
@@ -236,3 +235,7 @@ target_link_libraries(split ${catkin_LIBRARIES})
 
 add_executable(execute src/execute.cpp)
 target_link_libraries(execute ${catkin_LIBRARIES})
+
+add_executable(multi_band src/multi_band.cpp)
+target_link_libraries(multi_band ${catkin_LIBRARIES})
+

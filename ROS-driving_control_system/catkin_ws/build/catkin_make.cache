@@ -1,0 +1,2 @@
+video_stream
+-DCATKIN_DEVEL_PREFIX=/home/master/D2RSR/ROS-driving_control_system/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/master/D2RSR/ROS-driving_control_system/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=video_stream -G Unix Makefiles

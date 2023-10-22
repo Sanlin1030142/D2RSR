@@ -29,7 +29,7 @@
 
   <node name="web_video_server01" pkg="web_video_server" type="web_video_server" output="screen">
     <param name="address" value="0.0.0.0" />
-    <param name="port" value ="8080" />
+    <param name="port" value ="8000" />
     <param name="video_encoder" value="mjpeg" />
   </node>
 
@@ -40,6 +40,12 @@
   </node> -->
 
   <node name="multi" pkg="video_stream" type="multi_band" output="screen">
+    <param name="partial_1_2" value="8" />
+    <param name="partial_2_3" value="7" />
+    <param name="partial_3_4" value="6" />
+    <param name="partial_4_5" value="7" />
+    <param name="partial_5_6" value="6" />
+    <param name="partial_6_1" value="6" />
   </node>
 
 </launch>

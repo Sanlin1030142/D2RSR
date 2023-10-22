@@ -1,0 +1,11 @@
+<launch>
+
+  <node name="video_stream0" pkg="video_stream" type="trace" output="screen">
+    <param name="video_device" value="camera_0" />
+  </node>
+
+  <node name="video_stream1" pkg="video_stream" type="trace" output="screen">
+    <param name="video_device" value="camera_1" />
+  </node>
+
+</launch>

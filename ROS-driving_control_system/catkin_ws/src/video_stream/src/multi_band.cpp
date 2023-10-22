@@ -118,10 +118,10 @@ Mat merge_two_frame(Mat& A, Mat& B) {
     return blendedImg;
 }
 
-Mat merge_overlapping(Mat& A, Mat& B) {
+Mat merge_overlapping(Mat& A, Mat& B, int part) {
     int height = A.rows;
     int width = A.cols;
-    int overlap_width = width / partial;
+    int overlap_width = width / part ;
     Mat overlap_A = A(cv::Rect(width - overlap_width, 0, overlap_width, height));
     Mat overlap_B = B(cv::Rect(0, 0, overlap_width, height));
     return merge_two_frame(overlap_A, overlap_B);
@@ -131,7 +131,14 @@ int main(int argc, char** argv) {
     // Read the images, assuming images to be of same size
 
     ros::init(argc, argv, "stitched_frame");
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
+    int partial_1_2, partial_2_3, partial_3_4, partial_4_5, partial_5_6, partial_6_1 ;
+    nh.param<int>("partial_1_2", partial_1_2, 6);
+    nh.param<int>("partial_2_3", partial_2_3, 6);
+    nh.param<int>("partial_3_4", partial_3_4, 5);
+    nh.param<int>("partial_4_5", partial_4_5, 6);
+    nh.param<int>("partial_5_6", partial_5_6, 5);
+    nh.param<int>("partial_6_1", partial_6_1, 6);
     ros::Publisher pub = nh.advertise<sensor_msgs::Image>("stitched_frame", 1);
 
     ros::Subscriber sub0 = nh.subscribe<sensor_msgs::Image>("/trace/camera_0", 1, boost::bind(frameCallback, _1, 0));
@@ -153,18 +160,44 @@ int main(int argc, char** argv) {
         // Single frame size
         int width = frames[0].cols;
         int height = frames[0].rows;
-        int overlap_width = width / partial;
+        int overlap_width = width / partial_1_2;
         Mat panorama(288, 2112, frames[0].type(), cv::Scalar::all(0));
 
         panorama = frames[0](cv::Rect(overlap_width, 0, width - (2 * overlap_width) , height));
 
-        for ( int i = 1 ; i < 6 ; i++ ) {
-            Mat overlapping = move(merge_overlapping(frames[i-1], frames[i]));
-            cv::hconcat(panorama, overlapping, panorama);
-            cv::hconcat(panorama, frames[i](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
-        } 
+        // for ( int i = 1 ; i < 6 ; i++ ) {
+        //     Mat overlapping = move(merge_overlapping(frames[i-1], frames[i]));
+        //     cv::hconcat(panorama, overlapping, panorama);
+        //     cv::hconcat(panorama, frames[i](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
+        // } 
 
-        Mat overlapping = move(merge_overlapping(frames[5], frames[0]));
+        overlap_width = width / partial_1_2;
+        Mat overlapping = move(merge_overlapping(frames[0], frames[1], partial_1_2));
+        cv::hconcat(panorama, overlapping, panorama);
+        cv::hconcat(panorama, frames[1](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
+
+        overlap_width = width / partial_2_3;
+        overlapping = move(merge_overlapping(frames[1], frames[2], partial_2_3));
+        cv::hconcat(panorama, overlapping, panorama);
+        cv::hconcat(panorama, frames[2](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
+
+        overlap_width = width / partial_3_4;
+        overlapping = move(merge_overlapping(frames[2], frames[3], partial_3_4));
+        cv::hconcat(panorama, overlapping, panorama);
+        cv::hconcat(panorama, frames[3](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
+
+        overlap_width = width / partial_4_5;
+        overlapping = move(merge_overlapping(frames[3], frames[4], partial_4_5));
+        cv::hconcat(panorama, overlapping, panorama);
+        cv::hconcat(panorama, frames[4](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
+
+        overlap_width = width / partial_5_6;
+        overlapping = move(merge_overlapping(frames[4], frames[5], partial_5_6));
+        cv::hconcat(panorama, overlapping, panorama);
+        cv::hconcat(panorama, frames[5](cv::Rect(overlap_width, 0, width - ( 2 * overlap_width ), height)), panorama);
+
+        overlap_width = width / partial_6_1;
+        overlapping = move(merge_overlapping(frames[5], frames[0], partial_6_1));
         cv::hconcat(panorama, overlapping, panorama);
 
         

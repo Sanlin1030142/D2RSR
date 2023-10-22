@@ -21,11 +21,14 @@ var clear = new ROSLIB.Message({
 });
 
 function init() {
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
 
   var viewer = new ROS2D.Viewer({
     divID: 'map',
-    width: 800,
-    height: 600,
+    width: windowWidth*0.6,
+    height: windowHeight*0.9,
+    overflows: 'hidden'
   });
 
   var gridClient = new ROS2D.OccupancyGridClient({
@@ -35,17 +38,24 @@ function init() {
   });
 
   gridClient.on('change', function () {
-    viewer.scaleToDimensions(gridClient.currentGrid.width * 0.2, gridClient.currentGrid.height * 0.2);
-    viewer.shift(gridClient.currentGrid.pose.position.x * 0.2, gridClient.currentGrid.pose.position.y * 0.2);
+    viewer.scaleToDimensions(gridClient.currentGrid.width * 0.15, gridClient.currentGrid.height * 0.15);
+    viewer.shift(gridClient.currentGrid.pose.position.x * 0.15, gridClient.currentGrid.pose.position.y * 0.15);
   });
+
+
 }
+
+
+
 
 function START() {
   // 先移動 loading 圖片
   document.getElementById("loading").style.transform = "translateX(100vw)";
+  console.log("START");
   publisher.publish(start);
-  let coverElem = document.getElementById("cover");
-  coverElem.style.display = "none"; // 顯示蓋子
+
+
+  
 }
 
 // function START() {
@@ -60,24 +70,17 @@ function START() {
 // }
 
 function STOP() {
-  let coverElem = document.getElementById("cover");
   let loadingElem = document.getElementById("loading");
   loadingElem.style.transition = "none"; // 暫時關閉動畫
   loadingElem.style.transform = "translateX(-100vw)";
-  coverElem.style.display = "block"; // 顯示蓋子
   // 恢復動畫轉場效果，並進行動畫
+  console.log("STOP");
   setTimeout(function () {
     loadingElem.style.transition = "transform 1s ease-in-out"; // 打開動畫
   }, 10); // 10毫秒後恢復動畫效果並進行動畫
   loadingElem.style.transform = "translateX( 0vw )";
   publisher.publish(stop);
 }
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   init();

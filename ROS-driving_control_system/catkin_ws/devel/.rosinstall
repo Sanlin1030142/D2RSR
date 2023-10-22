@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/master/D2RSR/ROS-driving_control_system/catkin_ws/devel/setup.sh

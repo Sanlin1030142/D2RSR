@@ -1,0 +1,8 @@
+prefix=/home/master/D2RSR/ROS-driving_control_system/catkin_ws/install
+
+Name: rosky_control
+Description: Description of rosky_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

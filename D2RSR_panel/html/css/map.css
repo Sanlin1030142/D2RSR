@@ -1,11 +1,10 @@
 #map{
-    position: fixed;
-    width: 30vw;
-    height: 30vh;
-    left: 5vw;
-    top: 30vh;
+    position: absolute;
+    left: 40%;
+    top: 5%;
     z-index: 0;
     display: block;
+    overflow: hidden;
 }
 
 
@@ -30,13 +29,6 @@
     cursor: pointer;
 }
 
-#cover{
-    position: fixed;
-    width: 37vw;
-    height: 61.5vh;
-    background-color: rgb(0, 0, 0);
-    display: block;
-}
 
 #download{
     position: fixed;
