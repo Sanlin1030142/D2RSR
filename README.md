@@ -1,4 +1,4 @@
 # D2RSR
 **災難救助遙測機器人**
 
-D2RSR(Disaster Relief Remote Sensing Robot)基於開源系統ROS(Robot Operating System)開發，是專為災害應對設計的遙控感測機器人系統。
+![image](https://github.com/Sanlin1030142/D2RSR/assets/101783358/37b5af7f-9e02-4f65-9828-83b9380b80a6)

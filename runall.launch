@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="veh" default="$(env VEHICLE_NAME)" doc="Name of vehicle. ex: megaman"/>
+    <arg name="config" default="baseline" doc="Specify a config."/>
+    <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+
+
+
+    <!-- keyboard_mapper -->
+    <remap from="/$(arg veh)/keyboard_mapper_node/cmd_vel" to="cmd_vel"/>
+    <include file="$(find mapper)/launch/keyboard_mapper_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+
+    <!-- run inverse_kinematics_node -->
+    <remap from="inverse_kinematics_node/car_cmd" to="keyboard_mapper_node/car_cmd"/>
+    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
+    <include file="$(find ominibot_car)/launch/inverse_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="config" value="$(arg config)"/>
+    </include>
+
+
+    <!-- Wheels Driver -->
+    <include file="$(find ominibot_car)/launch/wheels_ominibot_driver_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+
+    <group ns="rosky01">
+        <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
+            <param name="port"         type="string" value="/dev/ydlidar"/>  
+            <param name="baudrate"     type="int"    value="128000"/>
+            <param name="frame_id"     type="string" value="laser_frame"/>
+            <param name="low_exposure"  type="bool"   value="false"/>
+            <param name="resolution_fixed"    type="bool"   value="true"/>
+            <param name="auto_reconnect"    type="bool"   value="true"/>
+            <param name="reversion"    type="bool"   value="false"/>
+            <param name="angle_min"    type="double" value="-180" />
+            <param name="angle_max"    type="double" value="180" />
+            <param name="range_min"    type="double" value="0.1" />
+            <param name="range_max"    type="double" value="16.0" />
+            <param name="ignore_array" type="string" value="" />
+            <param name="samp_rate"    type="int"    value="9"/>
+            <param name="frequency"    type="double" value="7"/>
+        </node>
+    </group>
+    
+    <node  name="execute" pkg="showmap" type="execute" output="screen" respawn="false"/>
+
+</launch>
