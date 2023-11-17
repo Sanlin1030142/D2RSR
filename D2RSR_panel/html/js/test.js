@@ -48,8 +48,6 @@ var originalSrc = {
   'camera_view': 'img/D2RSR_view.png',
   'mjpeg1': 'http://192.168.0.91:8000/stream?topic=/multi/stitched_frame',
   'mjpeg2': 'http://192.168.0.91:8000/stream?topic=/multi/stitched_frame',
-  'mjpeg3': 'http://192.168.0.91:8000/stream?topic=/multi1/stitched_frame',
-  'mjpeg4': 'http://192.168.0.91:8000/stream?topic=/multi1/stitched_frame',
   // 'mjpeg1': 'http://192.168.0.91:8090',
   // 'mjpeg2': 'http://192.168.0.91:8090',
   // http://192.168.0.26:8090/
@@ -61,22 +59,35 @@ var ros_camera = new ROSLIB.Ros({
   url: 'ws://localhost:9090'
 });
 
-var ros_test = new ROSLIB.Ros({
+var ros_map = new ROSLIB.Ros({
   url: 'ws://localhost:9090'
 });
 
-// 儲存ros的傳輸訊息
 var publisher = new ROSLIB.Topic({
+  ros: ros_map,
+  name: "/command",
+  messageType: "std_msgs/String",
+});
+
+// 儲存ros的傳輸訊息
+var publisher1 = new ROSLIB.Topic({
   ros: ros_camera,
   name: "/usb_video",
   messageType: "std_msgs/String",
 });
 
-var publisher1 = new ROSLIB.Topic({
-  ros: ros_test,
-  name: "/test",
-  messageType: "std_msgs/String",
+var start = new ROSLIB.Message({
+  data: "bash ~/rosky_slam.sh",
 });
+
+var stop = new ROSLIB.Message({
+  data: "stop",
+});
+
+var clear = new ROSLIB.Message({
+  data: "clear",
+});
+
 
 var start1 = new ROSLIB.Message({
   data: "start",
@@ -110,7 +121,7 @@ function showContent(pageId) {
 
   // 如果是相机页面，加载图片
   if (pageId === 'camera') {
-    publisher.publish(start1);
+    publisher1.publish(start1);
     console.log("START camera");
     var grid = document.querySelector('.image-grid');
     var slider = document.querySelector('.image-slider');
@@ -123,20 +134,19 @@ function showContent(pageId) {
   }
 
   if ( pageId === 'home' ) {
-    publisher.publish(start_runall);
-    publisher1.publish(start1); // for testing
+    publisher1.publish(stop1);
     console.log("STOP camera");
   } // if() 
 
   if (pageId === 'mapping') {
-    publisher.publish(stop1);
+    publisher1.publish(stop1);
     console.log("STOP camera");
     //var map_camera = document.getElementById('map_camera');
     //map_camera.src = originalSrc[map_camera.id];
   }
 
   if ( pageId === 'panorama' ) {
-    publisher.publish(start1);
+    publisher1.publish(start1);
     console.log("START camera");
     
     window.location.href = 'http://192.168.0.91/panorama.html';
@@ -189,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     document.getElementById(activeMenu).classList.add('active');
   } 
-  
+
   var navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(function (item) {
     item.classList.remove('is-active'); // 移除所有active類
@@ -202,3 +212,105 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+
+
+function init() {
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  var viewer = new ROS2D.Viewer({
+    divID: 'map',
+    width: windowWidth * 0.6,
+    height: windowHeight,
+    overflows: 'hidden'
+  });
+
+  var gridClient = new ROS2D.OccupancyGridClient({
+    ros: ros_map,
+    rootObject: viewer.scene,
+    continuous: true
+  });
+
+  gridClient.on('change', function () {
+    viewer.scaleToDimensions(gridClient.currentGrid.width * 0.15, gridClient.currentGrid.height * 0.15);
+    viewer.shift(gridClient.currentGrid.pose.position.x * 0.15, gridClient.currentGrid.pose.position.y * 0.15);
+  });
+
+
+}
+
+function START() {
+  // 先移動 loading 圖片
+  document.getElementById("loading").style.transform = "translateX(100vw)";
+  console.log("START map");
+  document.getElementById('start').style.display = 'none';
+  document.getElementById('stop').style.display = 'inline';
+  publisher.publish(start);
+
+}
+
+// function START() {
+//   console.log("START");
+//   publisher.publish(start);
+
+// }
+
+// function STOP() {
+//   console.log("STOP");
+//   publisher.publish(stop);
+// }
+
+function STOP() {
+  publisher1.publish(stop_runall);
+  setTimeout(function () {
+    publisher.publish(stop);
+    setTimeout(function () {
+      let loadingElem = document.getElementById("loading");
+      console.log("STOP map");
+      setTimeout(function () {
+        loadingElem.style.transition = "transform 5s ease-in-out"; // 打開動畫
+      }, 10); // 10毫秒後恢復動畫效果並進行動畫
+      loadingElem.style.transform = "translateX( 0vw )";
+      document.getElementById('stop').style.display = 'none';
+      document.getElementById('start').style.display = 'inline';
+    }, 2000);
+  }, 500);
+  
+}
+
+function Navigation() {
+  publisher1.publish(  );
+
+
+  window.location.href = 'http://192.168.0.91/navigation.html';
+  console.log("Navigation");
+}
+
+function Start_runall() {
+  publisher1.publish(start_runall);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  init();
+},);
+
+// window.addEventListener('DOMContentLoaded', (event) => {
+//   let icon = document.getElementById("icon");
+
+//   icon.addEventListener("click", function () {
+//     let mapCamera = document.getElementById("map_camera");
+//     let icon = document.getElementById("icon");
+
+//     let computedStyle = window.getComputedStyle(mapCamera);
+
+//     if (computedStyle.display === "block") {
+//       mapCamera.style.display = "none";
+//       icon.classList.remove("fa-video");
+//       icon.classList.add("fa-video-slash");
+//     } else {
+//       mapCamera.style.display = "block";
+//       icon.classList.remove("fa-video-slash");
+//       icon.classList.add("fa-video");
+//     }
+//   });
+// });

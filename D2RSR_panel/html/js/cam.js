@@ -14,6 +14,7 @@ let listener = new ROSLIB.Topic({
 
 // buttom6
 window.onload = function () {
+  console.log("window loaded");
   var cam_status = document.getElementById('cam_status');
   var grid = document.querySelector('.image-grid');
   var slider = document.querySelector('.image-slider');
@@ -23,7 +24,8 @@ window.onload = function () {
 
 
   cam_status.onclick = function () {
-    if (this.src.match('cam_multiple')) {
+    console.log(this.src);
+    if (this.src.match('img/cam_multiple.png')) {
       this.src = 'img/cam_single.png';
       grid.classList.remove('show'); // hide grid
       slider.classList.add('show');  // show slider

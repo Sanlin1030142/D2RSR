@@ -12,12 +12,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <script src="js/roslib.js"></script>
-  <script src="js/cam.js"></script>
-  <script src="js/panorama.js"></script>
+
+  <!-- <script src="js/panorama.js"></script> -->
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script src="js/ros2d.js"></script>
   <script src="js/eventemitter2.js"></script>
-  <script type="text/javascript" charset="utf-8" src="js/map.js"></script>
+  <!-- <script type="text/javascript" charset="utf-8" src="js/map.js"></script> -->
   <script src="https://storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src='https://cdn.jsdelivr.net/gsap/1.19.1/TweenMax.min.js'></script>
@@ -41,9 +41,9 @@
       <span class="nav-indicator"></span>
     </nav>
   </div>
-  <div id="home" class="content active">
+  <div id="home" class="content ">
     <div id="home-bg"></div>
-    <img id="ROSKY-image" src="img/ROSKY.png" alt="ROSKY" />
+    <img id="ROSKY-image" src="img/ROSKY.png" alt="ROSKY" onclick="Start_runall()" />
     <div id="ROSKY-text">
       <div style="font-size: 9vh;">D2RSR</div>
       <div>災難救助遙測機器人</div>
@@ -53,7 +53,7 @@
   </div>
 
 
-  <div id="camera" class="content ">
+  <div id="camera" class="content active">
     <div id="title">實時影像監控</div>
     <img id="cam_status" src="img/cam_multiple.png" alt="cam_multiple" />
     <div class="image-grid show">
@@ -155,11 +155,9 @@
           <img id="stop" src="img/stop.png" onclick=STOP()>
           <img id="loading" src="img/loading.png">
           <img id="start" src="img/start.png" onclick="START()">
-
+          <img id="navigation" src="img/navigation.png" onclick="Navigation()">
         </div>
       </div>
-
-
 
       <div id="simulation" class="Simulation">
         <div class="condition">
@@ -211,7 +209,12 @@
     </div>
 
     <script type="text/javascript" src="js/simulation_ROSKY.js"></script>
-    <script src="js/menu.js"></script>
+    
+    <script src="js/cam.js"></script>
+    <!-- <script src="js/menu.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/map.js"></script> -->
+    <script src="js/test.js"></script>
+    
 </body>
 
 </html>

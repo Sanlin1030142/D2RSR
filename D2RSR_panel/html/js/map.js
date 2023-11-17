@@ -1,5 +1,5 @@
 var ros_map = new ROSLIB.Ros({
-  url: 'ws://localhost:9090'
+  url: 'ws://localhost:9091'
 });
 
 var publisher = new ROSLIB.Topic({
@@ -43,6 +43,7 @@ function init() {
   });
 
 
+
 }
 
 
@@ -51,7 +52,7 @@ function init() {
 function START() {
   // 先移動 loading 圖片
   document.getElementById("loading").style.transform = "translateX(100vw)";
-  console.log("START");
+  console.log("START map");
   document.getElementById('start').style.display = 'none';
   document.getElementById('stop').style.display = 'inline';
   publisher.publish(start);
@@ -75,7 +76,7 @@ function STOP() {
   publisher.publish(stop);
   setTimeout(function () {
     let loadingElem = document.getElementById("loading");
-    console.log("STOP");
+    console.log("STOP map");
     setTimeout(function () {
       loadingElem.style.transition = "transform 5s ease-in-out"; // 打開動畫
     }, 10); // 10毫秒後恢復動畫效果並進行動畫
@@ -85,27 +86,35 @@ function STOP() {
   }, 2000);
 }
 
+function Navigation() {
+  
+
+
+  window.location.href = 'http://192.168.0.91/navigation.html';
+  console.log("Navigation");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   init();
 },);
 
-window.addEventListener('DOMContentLoaded', (event) => {
-  let icon = document.getElementById("icon");
+// window.addEventListener('DOMContentLoaded', (event) => {
+//   let icon = document.getElementById("icon");
 
-  icon.addEventListener("click", function () {
-    let mapCamera = document.getElementById("map_camera");
-    let icon = document.getElementById("icon");
+//   icon.addEventListener("click", function () {
+//     let mapCamera = document.getElementById("map_camera");
+//     let icon = document.getElementById("icon");
 
-    let computedStyle = window.getComputedStyle(mapCamera);
+//     let computedStyle = window.getComputedStyle(mapCamera);
 
-    if (computedStyle.display === "block") {
-      mapCamera.style.display = "none";
-      icon.classList.remove("fa-video");
-      icon.classList.add("fa-video-slash");
-    } else {
-      mapCamera.style.display = "block";
-      icon.classList.remove("fa-video-slash");
-      icon.classList.add("fa-video");
-    }
-  });
-});
+//     if (computedStyle.display === "block") {
+//       mapCamera.style.display = "none";
+//       icon.classList.remove("fa-video");
+//       icon.classList.add("fa-video-slash");
+//     } else {
+//       mapCamera.style.display = "block";
+//       icon.classList.remove("fa-video-slash");
+//       icon.classList.add("fa-video");
+//     }
+//   });
+// });

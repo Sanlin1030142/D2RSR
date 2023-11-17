@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/panorama.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <script src="js/roslib.js"></script>
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="js/panorama.js"></script> <!-- here is extra -->
+  <script src="js/ros2d.js"></script>
+  <script src="js/eventemitter2.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</head>
+
+<body>
+
+  <div id="top-bar">
+    <img id="logo" src="img/D2RSR_logo.png" alt="D2RSR">
+
+    <nav class="nav">
+      <a href="#" onclick="showContent('home'); handleIndicator(this); " class="nav-item" active-color="orange"><i
+          class="fa-solid fa-house" style="color: #b8c3d6;"></i></i> 首頁</a>
+      <a href="#" onclick="showContent('camera'); handleIndicator(this);" class="nav-item" active-color="blue"><i
+          class="fa-solid fa-table-cells"></i> 實時監控</a>
+      <a href="#" onclick="showContent('panorama')" class="nav-item is-active" active-color="rebeccapurple"><i
+          class="fa-solid fa-globe"></i> 即時環景</a>
+      <a href="#" onclick="showContent('mapping'); handleIndicator(this);" class="nav-item" active-color="red"><i class="fa-regular fa-map"></i>
+        即時地圖</a>
+
+      <span class="nav-indicator"></span>
+    </nav>
+  </div>
+  <div id="home" class="content ">
+  </div>
+
+
+  <div id="camera" class="content ">
+    
+  </div>
+
+  <div id="panorama" class="content active">
+    <div id="carousel_container">
+      <div class="carousel-content">
+        <img id='mjpeg1'
+          src="http://192.168.0.91:8000/stream?topic=/multi/stitched_frame"
+          alt="MJPEG Stream" /><img id='mjpeg2'
+          src="http://192.168.0.91:8000/stream?topic=/multi/stitched_frame"
+          alt="MJPEG Stream" />
+      </div>
+    </div>
+    <img id=panorama_car src="img/D2RSR_car.png" alt="panorama_car" />
+    <img id=panorama_view src="img/D2RSR_view.png" alt="panorama_view" />
+
+  </div>
+
+  <div id="mapping" class="content" style="overflow: hidden;">
+   
+
+
+  </div>
+
+  <script src="js/jump.js"></script>
+  <!-- <script src="js/panorama.js"></script> -->
+</body>
+
+</html>
