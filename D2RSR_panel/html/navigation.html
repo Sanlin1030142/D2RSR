@@ -17,11 +17,13 @@
 <body>
     <h1>基本 ROS 導航</h1>
     <div id="mapCanvas"></div>
-    <!--img id=back src="img/back.png" onclick=Goback() /-->
+    
 
     <div class="buttom">
-        <!-- 這個寫法之後可能會被淘汰，先跟你講一下 -->
-        <button id="back"><a href="http://192.168.0.91/?active=mapping">返回</a></button>
+
+        <!-- <button id="back"><a href="http://192.168.0.91/?active=mapping">返回</a></button> -->
+        <!-- img id=back src="img/back.png" onclick=Goback() -->
+        <img id="back" src="img/back.png" onclick="Goback()" />
     </div>
     <!-- 引入自訂的 JavaScript -->
     <script src="js/navigation.js"></script>
