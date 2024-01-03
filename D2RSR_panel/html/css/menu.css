@@ -51,6 +51,8 @@ body {
   left: 38vw;
   z-index: 100;
   width: 50vh;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
 #xbox_bubble{
@@ -161,13 +163,13 @@ body {
 
 @keyframes up-down {
   0% {
-      transform: translateY(0);
+      transform: translateY(0) ;
   }
   50% {
-      transform: translateY(3vh);
+      transform: translateY(3vh) ;
   }
   100% {
-      transform: translateY(0);
+      transform: translateY(0) ;
   }
 }
 

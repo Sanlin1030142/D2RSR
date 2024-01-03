@@ -66,5 +66,24 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function Goback() {
-    window.location.href = 'http://192.168.0.91/?active=mapping';
+    window.location.href = 'index.html?active=mapping';
+}
+
+var ros_auto = new ROSLIB.Ros({
+    url: 'ws://localhost:9090' // 根据您的配置调整 WebSocket 连接地址
+});
+
+var publisher = new ROSLIB.Topic({
+    ros: ros_auto,
+    name: "/get_goal",
+    messageType: "std_msgs/String",
+});
+
+var get = new ROSLIB.Message({
+    data: "get",
+});
+
+function Trace() {
+    publisher.publish(get);
+    console.log('publish get');
 }

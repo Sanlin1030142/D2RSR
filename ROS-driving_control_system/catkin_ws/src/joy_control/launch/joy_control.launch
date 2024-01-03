@@ -1,17 +1,26 @@
 <launch>
 
- <!-- joy node -->
-  <node respawn="true" pkg="joy"
-        type="joy_node" name="joy_sensor" >
-    <param name="dev" type="string" value="/dev/input/js2" />
+  <!-- joy_control node -->
+  <node pkg="joy_control" type="joy_control_ps" name="joy_control_ps" output="screen">
+    <param name="RT_index" value="2" />
+    <param name="LT_index" value="5" />
+    <param name="axis_index" value="0" />
+    <param name="LB_index" value="4" />
+    <param name="RB_index" value="5" />
+    <param name="option_index" value="7" />
+    <param name="B" value="1" />
+    <param name="A" value="0" />
+    <param name="velocity" value="0.01" />
+    <param name="rotational" value="0.45" />
+  </node>
+
+  <!-- joy node -->
+  <node respawn="true" pkg="joy" type="joy_node" name="joy_sensor" >
+    <param name="dev" type="string" value="/dev/input/js0" />
     <param name="deadzone" value="0.12" />
     <param name="default_trig_val" value="true" />
     <param name="autorepeat_rate" value="1000" />
   </node>
 
- <!-- Axes -->
-  <node pkg="joy_control" type="joy_twist" name="joy_control_node" output="screen"/>
-  <param name="velocity" value="0.22" />
-  <param name="rotational" value="2.86" />
-  </node>
+
 </launch>

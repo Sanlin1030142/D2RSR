@@ -1,5 +1,5 @@
 body {
-    font-family: "Rajdhani", sans-serif;
+    font-family: 'DotGothic16', sans-serif;
     text-align: center;
     position: relative;
     display: flex;
@@ -7,57 +7,243 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(rgb(90, 90, 90), rgb(133, 133, 133), rgb(90, 90, 90));
+    background-image: linear-gradient(#000000, #405B98, #000000);
     overflow: hidden;
+    z-index: -999;
 }
 
-h1 {
-    color: #ffffff;
-}
-
-#mapCanvas {
-    width: 800px;
-    height: 600px;
-    border: 1px solid #888;
-    margin: 20px auto;
-    /* 上下邊距 20px，左右自動，以居中 canvas */
-    background: #fff;
-}
-
-/* 增加一些互動效果 */
-#mapCanvas:hover {
-    border-color: #555;
-}
-
-.buttom {
-    width: 100%;
-    margin: auto;
-    padding: 1vw;
-    background-color: #363636;
+/*          top區塊          */
+.top {
     position: absolute;
-    bottom: 0%;
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
-    z-index: 1;
-    
+    height: 100vh;
+    width: 100%;
 }
 
-.buttom button a {
-    text-decoration: none;
-    color: inherit;
-    
+/*          名字          */
+#name_frame {
+    width: 30vh;
+    height: 30vh;
+    padding: 1vh;
+    position: absolute;
+    top: 2.5vh;
+    left: 0vh;
+    clip-path: polygon(0% 35%, 8% 27%, 50% 27%, 58% 35%, 100% 35%, 100% 51%, 80% 51%, 76% 54%, 18% 54%, 14% 51%, 0% 51%);
+    background: linear-gradient(45deg, #50a13e, #50a13e, #e5e647, #50a13e, #50a13e);
 }
 
-.buttom button {
-    color: gold;
-    background-color: #363636;
-    border: 0.4vh solid gold;
-    border-radius: 10vh;
-    cursor: pointer;
+#name {
+    width: 30vh;
+    height: 3.5vh;
+    position: absolute;
+    top: 14vh;
+    left: 1.5vh;
+    color: #ffffff;
+    font-size: 2.5vh;
+    text-indent: -13vh;
+    padding-top: 0.7vh;
+
+    background-color: #000000;
 }
 
-.button:hover {
-    border: 0.4vh solid rgb(233, 202, 30);
-    color: #363636;
+
+/*          畫面          */
+#mapCanvas {
+    position: absolute;
+    z-index: 0;
+    top: 10vw;
+    left: 30vw ;
+}
+
+#mapBorder {
+    width: 135vh;
+    height: 85vh;
+    position: absolute;
+    right: 12vh;
+    top: 4vh;
+    clip-path: polygon(15% 0%, 70% 0, 80% 15%, 88% 15%, 100% 33%, 100% 100%, 18% 100%, 0 73%, 0% 23%);
+    background: #7f7f7f;
+    z-index: -1;
+}
+
+/*          按鈕(back)設計          */
+.f-back {
+    position: absolute;
+    right: 3vh;
+    top: 1.5vh;
+    filter: drop-shadow(0vh 0vh 3vh #3d6772);
+}
+
+.back {
+    width: 30vh;
+    height: 30vh;
+    font-size: 9vh;
+    color: black;
+    padding-bottom: 15vh;
+    padding-left: 15vh;
+    border: none;
+    border-radius: 1vh;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 80% 80%, 80% 60%, 40% 20%, 20% 20%);
+    background: linear-gradient(45deg, #64c0ab, #64c0ab, #64c0ab, #83ccd2, #64c0ab);
+}
+
+.back:hover {
+    transform: scale(1.05);
+}
+
+/*          按鈕(set-position)設計          */
+.f-set-position {
+    position: absolute;
+    right: 126vh;
+    bottom: 11vh;
+    filter: drop-shadow(0vh 0vh 2vh #3d6772);
+}
+
+.set-position {
+    width: 30vh;
+    height: 24vh;
+    font-size: 5vh;
+    border: none;
+    clip-path: polygon(14% 73%, 29% 14%, 100% 100%, 35% 100%);
+    background: radial-gradient(circle at center, #83ccd2, #64c0ab);
+}
+
+.fa.fa-thumbtack {
+    margin-right: 3.2vh;
+    margin-top: 9vh;
+}
+
+.set-position:hover {
+    transform: scale(1.1);
+}
+
+
+/*          圓與線          */
+#circle-01 {
+    position: absolute;
+    top: 22vh;
+    left: 5vh;
+    width: 4vh;
+    height: 4vh;
+    border-radius: 999em;
+    background: radial-gradient(circle at center, #3c726e, #E5E644, #E5E644);
+}
+
+#circle-02 {
+    position: absolute;
+    top: 34.5vh;
+    left: 23vh;
+    width: 4vh;
+    height: 4vh;
+    border-radius: 999em;
+    background: radial-gradient(circle at center, #3c726e, #E5E644, #E5E644);
+}
+
+#line-01 {
+    position: absolute;
+    top: 25vh;
+    left: 9.2vh;
+    width: 0.5vh;
+    height: 12vh;
+    transform: rotate(-20deg);
+    background-color: #E5E644;
+}
+
+#line-02 {
+    position: absolute;
+    top: 30.6vh;
+    left: 17.1vh;
+    width: 0.5vh;
+    height: 12vh;
+    transform: rotate(90deg);
+    background-color: #E5E644;
+}
+
+
+/*          平行四邊形          */
+#square-00 {
+    width: 6vh;
+    height: 8vh;
+    position: absolute;
+    left: -5vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+#square-01 {
+    width: 6vh;
+    height: 8vh;
+    position: absolute;
+    left: 3vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+#square-02 {
+    width: 6vh;
+    height: 8vh;
+    position: absolute;
+    left: 11vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+#square-03 {
+    width: 6vh;
+    height: 8vh;
+    position: absolute;
+    left: 19vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+#square-04 {
+    width: 6vh;
+    height: 7vh;
+    position: absolute;
+    left: 31vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+#square-05 {
+    width: 6vh;
+    height: 7vh;
+    position: absolute;
+    left: 40vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+#square-06 {
+    width: 6vh;
+    height: 7vh;
+    position: absolute;
+    left: 49vh;
+    bottom: 3vh;
+    transform: skewX(-23deg);
+    background: linear-gradient(#e5e647, #284c32, #e5e647);
+}
+
+
+/*          邊框          */
+.f-frame-01 {
+    position: absolute;
+    right: 3vh;
+    bottom: 3vh;
+}
+
+.frame-01 {
+    width: 150vh;
+    height: 70vh;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    clip-path: polygon(98% 8%, 100% 12%, 100% 100%, 0 100%, 2.3% 88%, 6% 96%, 98% 96%);
+    background: linear-gradient(-65deg, #284c32, #e5e647, #284c32, #e5e647, #e5e647);
 }

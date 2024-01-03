@@ -88,14 +88,14 @@ function showContent(pageId) {
   if ( pageId === 'home' ) {
     publisher.publish(stop2);
     console.log("STOP camera");
-    window.location.href = 'http://192.168.0.91?active=home';
+    window.location.href = 'index.html?active=home';
   } // if()
 
   // 如果是相机页面，加载图片
   if (pageId === 'camera') {
     publisher.publish(start2);
     console.log("START camera");
-    window.location.href = 'http://192.168.0.91?active=camera';
+    window.location.href = 'index.html?active=camera';
   }
 
   // 如果是全景页面，加载图片
@@ -111,7 +111,7 @@ function showContent(pageId) {
   if (pageId === 'mapping') {
     publisher.publish(stop2);
     console.log("STOP camera");
-    window.location.href = 'http://192.168.0.91?active=mapping';
+    window.location.href = 'index.html?active=mapping';
   }
 
 

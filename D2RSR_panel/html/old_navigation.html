@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入 CSS 樣式表 -->
+    <link rel="stylesheet" type="text/css" href="css/navigation.css">
+    <!-- 引入 JavaScript 圖書館 -->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="js/roslib.js"></script>
+    <script src="js/eventemitter2.js"></script>
+    <script src="js/ros2d.js"></script>
+
+
+</head>
+
+<body>
+    <h1>基本 ROS 導航</h1>
+    <div id="mapCanvas"></div>
+    
+
+    <div class="buttom">
+        <!-- <button id="back"> <a href="http://192.168.0.91/?active=mapping">返回 </a> </button> -->
+        <img id="back" src="img/star_back.png" onclick=Goback() />
+    </div>
+
+    <img id="navi" src="img/position.png" onclick=Trace() />
+    <!-- 引入自訂的 JavaScript -->
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

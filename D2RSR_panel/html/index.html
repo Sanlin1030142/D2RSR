@@ -26,7 +26,7 @@
 <body>
 
   <div id="top-bar">
-    <img id="logo" src="img/D2RSR_logo.png" alt="D2RSR">
+    <img id="logo" src="img/D2RSR_logo.png" alt="D2RSR" onclick=Secret()>
 
     <nav class="nav">
       <a href="#" onclick="showContent('home')" class="nav-item is-active" active-color="orange"><i
@@ -43,7 +43,7 @@
   </div>
   <div id="home" class="content ">
     <div id="home-bg"></div>
-    <img id="ROSKY-image" src="img/ROSKY.png" alt="ROSKY" onclick="Start_runall()" />
+    <img id="ROSKY-image" src="img/ROSKY.png" alt="ROSKY" onclick="Start_runall()"/>
     <div id="ROSKY-text">
       <div style="font-size: 9vh;">D2RSR</div>
       <div>災難救助遙測機器人</div>
@@ -131,6 +131,15 @@
       <img id=camera_view src="img/D2RSR_view.png" alt="view" />
 
     </div>
+
+    <div class="position">
+      <img id="front_pos" src="img/front_pos.png" alt="front_pos" />
+      <img id="right_front_pos" src="img/right_front_pos.png" alt="right_front_pos" />
+      <img id="right_back_pos" src="img/right_back_pos.png" alt="right_back_pos" />
+      <img id="back_pos" src="img/back_pos.png" alt="back_pos" />
+      <img id="left_back_pos" src="img/left_back_pos.png" alt="left_back_pos" />
+      <img id="left_front_pos" src="img/left_front_pos.png" alt="left_front_pos" />
+    </div>
   </div>
 
   <div id="panorama" class="content">
@@ -154,9 +163,27 @@
         <div>
           <img id="stop" src="img/stop.png" onclick=STOP()>
           <img id="loading" src="img/loading.png">
-          <img id="start" src="img/start.png" onclick="START()">
-          <img id="navigation" src="img/navigation.png" onclick="Navigation()">
+          <img id="start" src="img/start.png" onclick=START()>
+          
         </div>
+      </div>
+
+      <div id="list_bubble_nav" onclick=Navigation()>
+          <img id="navigation" src="img/navigation.png" >
+          <span class="start_navigation">開始導航</span>
+      </div>
+
+      <div id="list_bubble_pin" onclick=Pin()>
+          <img id="pin" src="img/pin.png" >
+          <span class="locate">紀錄位置</span>
+      </div>
+
+      <div id="Pop-ups" class="modal">
+        <span id="isLocate">已標記目前位置</span>
+      </div>
+
+      <div id="image-container">
+        <img id="map_camera" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/9Aj3gAAAABJRU5ErkJggg==" alt="map_camera">
       </div>
 
       <div id="simulation" class="Simulation">
@@ -210,10 +237,11 @@
 
     <script type="text/javascript" src="js/simulation_ROSKY.js"></script>
     
-    <script src="js/cam.js"></script>
+    <!-- <script src="js/cam.js"></script> -->
     <!-- <script src="js/menu.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/map.js"></script> -->
     <script src="js/test.js"></script>
+    <script src="js/cam.js"></script>
     
 </body>
 

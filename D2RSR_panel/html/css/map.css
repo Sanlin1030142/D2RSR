@@ -7,17 +7,38 @@
     overflow: hidden;
   }
   
+  /* #map_camera {
+    user-select: none;    
+    position: relative;   
+    left: 0%;             
+    top: 0%;              
+    width: auto;          
+    height: auto;         
+    padding: 0;           
+    display: block;         
+    transition: all 0.3s ease; 
+    z-index: 0;            
+  } */
+
+  #image-container {
+    position: relative; /* 為絕對定位的子元素設置定位上下文 */
+    background-color: black; /* 容器背景色設置為黑色 */
+  }
+  
   #map_camera {
     user-select: none;
-    position: relative;
-    left: 0%;
-    top: 0%;
-    width: 20vw;
+    position: absolute; /* 絕對定位 */
+    left: 0;
+    top: 5%;
+    width: 30%; /* 寬度根據影像的原始尺寸自動調整 */
+    height: auto; /* 高度根據影像的原始尺寸自動調整 */
     padding: 0;
     display: block;
     transition: all 0.3s ease;
+    z-index: 1; /* 確保影像在容器之上 */
   }
   
+
   #collapse_menu {
     user-select: none;
     position: absolute;
@@ -55,15 +76,99 @@
     transition: transform 15s ease-in-out;
   }
 
-  #navigation {
+  /* #navigation {
     position: fixed;
-    width: 7vw;
+    width: 5vw;
     height: auto;
-    left: 88vw;
-    top: 15vh;
+    left: 90vw;
+    top: 12vh;
     cursor: pointer;
+  } */
+
+  #list_bubble_nav {
+    position: absolute;
+    width: 7vw;
+    height: 3vw;
+    left: 48vw;
+    top: 8vh;
+    cursor: pointer;
+    border: 5px solid white;
+    border-radius: 15%;
+    padding: 6px;
+    display: flex; /* 啟用flex布局 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
   }
-  
+
+  #navigation {
+    position: relative;
+    width: 2vw;
+    height: auto;
+    left:8px;
+  }
+
+  .start_navigation {
+    position: relative;
+    width: 5vw;
+    color:white;
+    z-index: 2;
+  }
+
+  #list_bubble_pin {
+    position: absolute;
+    width: 7vw;
+    height: 3vw;
+    left: 38vw;
+    top: 8vh;
+    cursor: pointer;
+    border: 5px solid white;
+    border-radius: 15%;
+    padding: 5px;
+    /* display: flex;*/
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    display: none;
+  }
+
+  #pin {
+    position: relative;
+    width: 2vw;
+    height: auto;
+    top:10px;
+    left:-2px;
+    transform:rotate(45deg)
+  }
+
+  .locate {
+    position: relative;
+    width: 5vw;
+    height: auto;
+    top:-3px;
+    color:white;
+  }
+
+  .modal {
+    /* display: none; */
+    position: absolute; /* 保持固定位置 */
+    z-index: 1; /* 置於頂層 */
+    left: 20vw;
+    top: 60vw;
+    width: 15vw; /* 全屏寬度 */
+    height: 4vw; /* 全屏高度 */
+    background-color: rgba(255, 255, 255, 0.5); 
+    border-radius: 8%;
+    animation-fill-mode: forwards; /* 確保動畫結束後元素保持在最終狀態 */
+  }
+
+  #isLocate {
+    position: relative;
+    margin: 15% auto; /* 置中顯示 */
+    padding: 20px;
+    width: 20vw; /* 寬度 */
+    top:20px;
+    font-size: 27px ;
+  }
+
   #start {
     position: fixed;
     width: 8vw;
@@ -87,9 +192,29 @@
     display: none;
   }
   
-  #navigation:hover,
+  #list_bubble_pin:hover,
+  #list_bubble_nav:hover,
   #stop:hover,
   #start:hover {
     opacity: 0.7;
   }
   
+/* 彈窗進入的動畫 */
+@keyframes slideIn {
+  0% { transform: translateY(0vh); /* 從畫面下方進入 */ }
+  100% { transform: translateY(-28vh); /* 移動到最終位置 */ }
+}
+
+/* 彈窗退出的動畫 */
+@keyframes slideOut {
+  0% { transform: translateY(-28vh); /* 從最終位置開始 */ }
+  100% { transform: translateY(0vh); /* 移動回畫面下方 */ }
+}
+
+.slide-in {
+  animation: slideIn 1.5s ease-in forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.8s ease-in forwards;
+}

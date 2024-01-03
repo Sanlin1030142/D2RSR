@@ -3,30 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- 引入 CSS 字型 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <!-- 引入 CSS 樣式表 -->
     <link rel="stylesheet" type="text/css" href="css/navigation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" />
     <!-- 引入 JavaScript 圖書館 -->
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="js/roslib.js"></script>
     <script src="js/eventemitter2.js"></script>
     <script src="js/ros2d.js"></script>
+    <script src="js/navigation.js"></script>
 
 
 </head>
 
 <body>
-    <h1>基本 ROS 導航</h1>
-    <div id="mapCanvas"></div>
-    
+    <div class="top">
+        <!--          名字          -->
+        <span id="name_frame"></span>
+        <span id="name">基本 ROS 導航</span>
 
-    <div class="buttom">
+        <!--          畫面          -->
+        <div id="map">
+            <div id="mapCanvas"></div>
+            <div id="mapBorder"></div>
+        </div>>
 
-        <!-- <button id="back"><a href="http://192.168.0.91/?active=mapping">返回</a></button> -->
-        <!-- img id=back src="img/back.png" onclick=Goback() -->
-        <img id="back" src="img/back.png" onclick="Goback()" />
+        <!--          按鈕          -->
+        <span class="f-back">
+            <button class="back" onclick=Goback()><i class="fa fa-reply"></i></button>
+        </span>
+
+        <span class="f-set-position">
+            <button class="set-position" onclick=Trace()><i class="fa fa-thumbtack"></i></button>
+        </span>
+
+        <!--          裝飾          -->
+        <span id="circle-01"></span>
+        <span id="circle-02"></span>
+        <span id="line-01"></span>
+        <span id="line-02"></span>
+
+
+        <span id="square-00"></span>
+        <span id="square-01"></span>
+        <span id="square-02"></span>
+        <span id="square-03"></span>
+        <!-- <span id="square-04"></span>
+        <span id="square-05"></span>
+        <span id="square-06"></span> -->
+
+        <span class="f-frame-01">
+            <span class="frame-01"></span>
+        </span>
     </div>
-    <!-- 引入自訂的 JavaScript -->
-    <script src="js/navigation.js"></script>
 </body>
 
 </html>

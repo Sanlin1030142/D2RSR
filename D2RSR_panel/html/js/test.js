@@ -52,7 +52,7 @@ var originalSrc = {
   // 'mjpeg2': 'http://192.168.0.91:8090',
   // http://192.168.0.26:8090/
   // http://192.168.0.26:8000/stream?topic=/multi/stitched_frame
-  'map_camera': 'http://192.168.0.91:8000/stream?topic=/trace/camera_0'
+  'map_camera': 'http://192.168.0.91:8000/stream?topic=/trace/camera_0',
 };
 
 var ros_camera = new ROSLIB.Ros({
@@ -63,19 +63,39 @@ var ros_map = new ROSLIB.Ros({
   url: 'ws://localhost:9090'
 });
 
+var ros_nav = new ROSLIB.Ros({
+  url: 'ws://localhost:9090'
+});
+
+var ros_ping = new ROSLIB.Ros({
+  url: 'ws://localhost:9090'
+});
+
 var publisher = new ROSLIB.Topic({
   ros: ros_map,
   name: "/command",
   messageType: "std_msgs/String",
 });
 
-// 儲存ros的傳輸訊息
 var publisher1 = new ROSLIB.Topic({
   ros: ros_camera,
   name: "/usb_video",
   messageType: "std_msgs/String",
 });
 
+var publisher2 = new ROSLIB.Topic({
+  ros: ros_nav,
+  name: "/nav_signal",
+  messageType: "std_msgs/String",
+});
+
+var publisher3 = new ROSLIB.Topic({
+  ros: ros_ping,
+  name: "/goal_update",
+  messageType: "std_msgs/String",
+});
+
+// to close or open gmapping
 var start = new ROSLIB.Message({
   data: "bash ~/rosky_slam.sh",
 });
@@ -88,21 +108,37 @@ var clear = new ROSLIB.Message({
   data: "clear",
 });
 
-
+// to close or open camera
 var start1 = new ROSLIB.Message({
   data: "start",
-});
-
-var start_runall = new ROSLIB.Message({
-  data: "run",
 });
 
 var stop1 = new ROSLIB.Message({
   data: "stop",
 });
 
+// to close or open run all
+var start_runall = new ROSLIB.Message({
+  data: "run",
+});
+
 var stop_runall = new ROSLIB.Message({
   data: "navigation",
+});
+
+
+// to close or open navigation
+var start_navigation = new ROSLIB.Message({
+  data: "start_nav",
+});
+
+var stop_navigation = new ROSLIB.Message({
+  data: "stop_nav",
+});
+
+// to ping a location
+var pin = new ROSLIB.Message({
+  data: "set",
 });
 
 function loadImageBatch(images) {
@@ -127,29 +163,36 @@ function showContent(pageId) {
     var slider = document.querySelector('.image-slider');
     var gridImages = Array.from(grid.querySelectorAll("img"));
     var sliderImages = Array.from(slider.querySelectorAll("img"));
-
+    var position = document.querySelector('.position');
+    position.classList.add('show');  // show position
     loadImageBatch(gridImages);
 
     loadImageBatch(sliderImages);
   }
 
   if ( pageId === 'home' ) {
-    publisher1.publish(stop1);
     console.log("STOP camera");
+    publisher1.publish(stop1);
   } // if() 
 
   if (pageId === 'mapping') {
-    publisher1.publish(stop1);
-    console.log("STOP camera");
-    //var map_camera = document.getElementById('map_camera');
-    //map_camera.src = originalSrc[map_camera.id];
+    publisher1.publish(start1);
+    console.log("START camera");
+    var map_camera = document.getElementById('map_camera');
+    map_camera.src = originalSrc[map_camera.id];
+    map_camera.style.display = "block";
+    console.log("load at showContent");
+    retryLoadImage(map_camera, 5);  // 尝试重新加载5次
+
+    
   }
 
   if ( pageId === 'panorama' ) {
     publisher1.publish(start1);
     console.log("START camera");
     
-    window.location.href = 'http://192.168.0.91/panorama.html';
+    
+    window.location.href = 'panorama.html';
   } // if()
 
   var activeItem = document.querySelector('.nav-item.is-active');
@@ -165,6 +208,7 @@ function retryLoadImage(img, maxRetries) {
 
   if (img.retryCount < maxRetries) {
     console.warn('Retrying to load image:', img.src);
+    console.warn('Retry count:', img.retryCount);
     img.retryCount++;
 
     setTimeout(() => {
@@ -196,7 +240,44 @@ document.addEventListener('DOMContentLoaded', function () {
   if ( activeMenu === null ) {
     pageId = 'home';
     document.getElementById(pageId).classList.add('active');
-  } else {
+  } 
+  
+  else if ( activeMenu === 'mapping' ) {
+    pageId = 'mapping';
+    console.log("load at listener");
+    document.getElementById(pageId).classList.add('active');
+    // var map_camera = document.getElementById('map_camera');
+    // map_camera.src = originalSrc[map_camera.id];
+    // map_camera.style.display = "block";
+    // retryLoadImage(map_camera, 5);
+    // setTimeout(function () {
+    publisher2.publish( stop_navigation );
+
+    setTimeout(function () {
+      publisher1.publish( start_runall );
+      console.log("START run all");
+    }, 6000); // 6秒後再開啟run all
+    // }, 8000);
+
+    
+
+    
+
+  } // else if()
+
+  else if ( activeMenu === 'camera' ) {
+    pageId = 'camera';
+    document.getElementById(pageId).classList.add('active');
+    var grid = document.querySelector('.image-grid');
+    var slider = document.querySelector('.image-slider');
+    var gridImages = Array.from(grid.querySelectorAll("img"));
+    var sliderImages = Array.from(slider.querySelectorAll("img"));
+
+    loadImageBatch(gridImages);
+    loadImageBatch(sliderImages);
+  } // else if()
+
+  else {
     document.getElementById(activeMenu).classList.add('active');
   } 
 
@@ -245,20 +326,10 @@ function START() {
   console.log("START map");
   document.getElementById('start').style.display = 'none';
   document.getElementById('stop').style.display = 'inline';
+  document.getElementById('list_bubble_pin').style.display = 'inline';
   publisher.publish(start);
 
 }
-
-// function START() {
-//   console.log("START");
-//   publisher.publish(start);
-
-// }
-
-// function STOP() {
-//   console.log("STOP");
-//   publisher.publish(stop);
-// }
 
 function STOP() {
   publisher1.publish(stop_runall);
@@ -273,20 +344,56 @@ function STOP() {
       loadingElem.style.transform = "translateX( 0vw )";
       document.getElementById('stop').style.display = 'none';
       document.getElementById('start').style.display = 'inline';
+      document.getElementById('list_bubble_pin').style.display = 'none';
     }, 2000);
-  }, 500);
+  }, 2000);
   
 }
 
+function Secret() {
+  console.log("secretly stop run all");
+  publisher1.publish(stop_runall);
+
+}
+
+function Pin() {
+  console.log("Pin");
+  publisher3.publish(pin);
+  console.log("modal appear");
+  var modal = document.getElementById('Pop-ups');
+  modal.style.animation = ''; // 清除之前的動畫
+  modal.classList.add('slide-in'); // 添加進入動畫類別
+
+  setTimeout(function() {
+    modal.style.animation = ''; // 清除之前的動畫
+    modal.classList.remove('slide-in'); // 移除進入動畫類別
+    modal.classList.add('slide-out'); // 添加退出動畫類別
+    setTimeout(function() {
+        modal.classList.remove("slide-in", "slide-out");
+    }, 800); // 等待的時間應與CSS過渡時間相同
+  }, 3000); // 這裡的 5000 是彈窗顯示持續的時間（毫秒）   
+
+  
+  
+  // setTimeout(function () {
+  //   modal.classList.add("modal-hide");
+  //   console.log("modal disappear");
+  //   setTimeout(function() {
+  //       modal.classList.remove("modal-show", "modal-hide");
+  //   }, 600); // 等待的時間應與CSS過渡時間相同
+  // }, 1500); // 6秒後再收起彈窗
+}
+
 function Navigation() {
-  publisher1.publish(  );
+  publisher1.publish(stop1);
+  publisher2.publish( start_navigation );
 
-
-  window.location.href = 'http://192.168.0.91/navigation.html';
+  window.location.href = 'navigation.html';
   console.log("Navigation");
 }
 
 function Start_runall() {
+  console.log("START run all");
   publisher1.publish(start_runall);
 }
 

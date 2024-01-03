@@ -8,3 +8,4 @@ catkin_make --only-pkg-with-deps ydlidar_noise_filter
 catkin_make --only-pkg-with-deps web_msgs
 catkin_make --only-pkg-with-deps web_bridge
 catkin_make --only-pkg-with-deps video_stream
+catkin_make --only-pkg-with-deps signal

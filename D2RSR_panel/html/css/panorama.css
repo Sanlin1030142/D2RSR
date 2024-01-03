@@ -25,7 +25,8 @@
 }
 
 .carousel-content img {
-  width: 162%;
+  top: 10vh;
+  width: 160%;
   margin: 0;
   padding: 0;
   display: inline-block;

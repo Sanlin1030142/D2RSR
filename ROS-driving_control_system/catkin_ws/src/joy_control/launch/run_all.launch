@@ -6,21 +6,32 @@
         <param name="default_trig_val" value="true" />
         <param name="autorepeat_rate" value="125" />
     </node>
+
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
 
     <group ns="rosky01">
-        <param name="velocity" value="1" />
-        <param name="rotational" value="1" />
+        <param name="velocity" value="0.45" />   <!-- change velocity -->
+        <param name="rotational" value="0.8" /> <!-- change rotational -->
         <param name="publish_rate" value="7" />
         <node pkg="joy_control" type="joy_control" name="joy_control_node" output="screen">
             <remap from="/rosky01/joy" to="/joy" />
+            <param name="RT_index" value="4" />
+            <param name="LT_index" value="3" />
+            <param name="axis_index" value="0" />
+            <param name="LB_index" value="4" />
+            <param name="RB_index" value="5" />
+            <param name="option_index" value="7" />
+            <param name="B" value="1" />
+            <param name="A" value="0" />
+            <param name="velocity" value="0.0" />
+            <param name="rotational" value="0.0" />
+
         </node>
-        <node pkg="ydlidar_noise_filter" type="particle_filter" name="particle_filter" output="screen">
+        <node pkg="ydlidar_noise_filter" type="noise_filter" name="noise_filter" output="screen">
             <remap from="/scan" to="/rosky01/scan" />
         </node>
         <node pkg="avoidance" type="avoidance" name="avoidance" output="screen"/>
         <node name="collector" pkg="web_bridge" type="collector" output="screen"/>
-
 
     </group>
 

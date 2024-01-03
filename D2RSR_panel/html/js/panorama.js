@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 使用這個值來調整滾動速度
         // 例如，每次接收到的值可以增加或減少10像素的滾動，你可以根據需要調整這個值
         const scrollSpeed = 10;  // 滾動速度，每次滾動的像素數
-        adjustScrollBarPosition(-message.axes[2] * scrollSpeed);
+        adjustScrollBarPosition(-message.axes[3] * scrollSpeed);
 
         if ( message.buttons[3] == 1 && press == false ) {
             console.log('press down');
@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById("mjpeg2").src = "http://192.168.0.91:8000/stream?topic=/multi/stitched_frame"
                 console.info( "change to picture1" ) ;
             } // else()
+            
         } // if()
 
     });

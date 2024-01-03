@@ -18,24 +18,33 @@ window.onload = function () {
   var cam_status = document.getElementById('cam_status');
   var grid = document.querySelector('.image-grid');
   var slider = document.querySelector('.image-slider');
+  var position = document.querySelector('.position');
   var prevAxisValue = 0;
   var rotationAngle = 0; // 默認旋轉角度
   var cards = $('#card-slider .slider-item').toArray();
 
 
   cam_status.onclick = function () {
-    console.log(this.src);
+    console.log("hi");
     if (this.src.match('img/cam_multiple.png')) {
       this.src = 'img/cam_single.png';
       grid.classList.remove('show'); // hide grid
       slider.classList.add('show');  // show slider
-      var index = cards.findIndex(card => $(card).find('img').attr('id') === 'slider_top')
+      document.getElementById('front_pos').style.display = 'none';
+      document.getElementById('right_front_pos').style.display = 'none';
+      document.getElementById('right_back_pos').style.display = 'none';
+      document.getElementById('back_pos').style.display = 'none';
+      document.getElementById('left_back_pos').style.display = 'none';
+      document.getElementById('left_front_pos').style.display = 'none';
 
+      var index = cards.findIndex(card => $(card).find('img').attr('id') === 'slider_top')
+      
       while (index != 2) {
 
         const firstElem = cards.shift();
         cards.push(firstElem);
         index = cards.findIndex(card => $(card).find('img').attr('id') === 'slider_top')
+        
 
       }
       startAnim(cards);
@@ -44,6 +53,13 @@ window.onload = function () {
       this.src = 'img/cam_multiple.png';
       grid.classList.add('show');    // show grid
       slider.classList.remove('show'); // hide slider
+      
+      document.getElementById('front_pos').style.display = 'inline';
+      document.getElementById('right_front_pos').style.display = 'inline';
+      document.getElementById('right_back_pos').style.display = 'inline';
+      document.getElementById('back_pos').style.display = 'inline';
+      document.getElementById('left_back_pos').style.display = 'inline';
+      document.getElementById('left_front_pos').style.display = 'inline';
     }
 
 
@@ -79,7 +95,7 @@ window.onload = function () {
       var cards = $('#card-slider .slider-item').toArray();
 
       var index = cards.findIndex(card => $(card).find('img').attr('id') === targetID)
-
+      
 
       while (index != 2) {
 
@@ -97,10 +113,17 @@ window.onload = function () {
         console.error('Element with id "camera_view" not found!');
       }
 
+      document.getElementById('front_pos').style.display = 'none';
+      document.getElementById('right_front_pos').style.display = 'none';
+      document.getElementById('right_back_pos').style.display = 'none';
+      document.getElementById('back_pos').style.display = 'none';
+      document.getElementById('left_back_pos').style.display = 'none';
+      document.getElementById('left_front_pos').style.display = 'none';
       // 切換cam_status的src並更改顯示狀態
       cam_status.src = 'img/cam_single.png';
       grid.classList.remove('show'); // hide grid
       slider.classList.add('show');  // show slider
+      
 
     });
   });
@@ -111,7 +134,7 @@ window.onload = function () {
   function startAnim(array) {
     TweenMax.fromTo(array[0], 0.5, { x: 0, y: 0, opacity: 0.3, scale: 1 }, { x: 0, y: -240, opacity: 0, zIndex: 0, delay: 0.03, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[1], 0.5, { x: 158, y: 250, opacity: 1, zIndex: 1, scale: 1 }, { x: 0, y: 0, opacity: 0.3, zIndex: 0, scale: 1, ease: Cubic.easeInOut });
-    TweenMax.to(array[2], 0.5, { bezier: [{ x: 150, y: 500 }, { x: 280, y: 400 }, { x: 340, y: 300 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
+    TweenMax.to(array[2], 0.5, { bezier: [{ x: 150, y: 500 }, { x: 280, y: 400 }, { x: 340, y: 400 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[3], 0.5, { x: 0, y: 1000, opacity: 0, zIndex: 0, scale: 1 }, { x: 0, y: 800, opacity: 0.3, zIndex: 0, ease: Cubic.easeInOut });
     if (array[4]) {
       TweenMax.to(array[4], 0.5, { opacity: 0 });
@@ -132,7 +155,7 @@ window.onload = function () {
   function reverseAnim(array) {
 
     TweenMax.fromTo(array[1], 0.5, { x: 0, y: -240, opacity: 0, scale: 1 }, { x: 0, y: 0, opacity: 0.3, zIndex: 0, delay: 0.03, ease: Cubic.easeInOut });
-    TweenMax.to(array[2], 0.5, { bezier: [{ x: 0, y: 0 }, { x: 280, y: 100 }, { x: 340, y: 300 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
+    TweenMax.to(array[2], 0.5, { bezier: [{ x: 0, y: 0 }, { x: 280, y: 100 }, { x: 340, y: 400 }], zIndex: 1, opacity: 1, scale: 2, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[3], 0.5, { x: 150, y: 300, opacity: 1, zIndex: 0, scale: 1 }, { x: 0, y: 800, opacity: 0.3, zIndex: 0, ease: Cubic.easeInOut });
     TweenMax.fromTo(array[4], 0.5, { x: 0, y: 600, opacity: 0.3, zIndex: 1, scale: 1 }, { x: 0, y: 900, opacity: 0, zIndex: 0, scale: 1, ease: Cubic.easeInOut });
     if (array[0]) {
@@ -158,11 +181,13 @@ window.onload = function () {
 
   function handleslider(message) {
     if (prevAxisValue === 0 && message.axes[6] === -1) {
+      console.log("rotate right");
       rotationAngle += 60;
       const firstElem = cards.shift();
       cards.push(firstElem);
       startAnim(cards);
     } else if (prevAxisValue === 0 && message.axes[6] === 1) {
+      console.log("rotate right");
       rotationAngle -= 60;
       const lastElem = cards.pop();
       cards.unshift(lastElem);
