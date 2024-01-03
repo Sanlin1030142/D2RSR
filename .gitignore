@@ -6,5 +6,8 @@ openvino_env/
 *.deb
 *.jpg
 *.run
+*.png
+*.make
+*.cmake
 .vscode/launch.json
 .vscode/settings.json
